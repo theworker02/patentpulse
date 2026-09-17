@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+title: PatentPulse
+message: If you use PatentPulse, cite the USPTO bulk sources and this software.
+type: software
+authors:
+  - name: theworker02
+license: MIT
+repository-code: https://github.com/theworker02/patentpulse
+keywords:
+  - USPTO
+  - patents
+  - XML
+  - CPC
+  - full text
+references:
+  - type: software
+    title: USPTO Bulk Data Products
+    url: https://bulkdata.uspto.gov/
+  - type: article
+    title: "The Harvard USPTO Patent Dataset: A Large-Scale, Well-Structured, and Multi-Purpose Corpus of Patent Applications"
+    authors:
+      - family-names: Suzgun
+        given-names: Mirac
+      - family-names: Melas-Kyriazi
+        given-names: Luke
+      - family-names: Sarkar
+        given-names: Suproteem K.
+      - family-names: Kominers
+        given-names: Scott
+      - family-names: Shieber
+        given-names: Stuart
+    year: 2023

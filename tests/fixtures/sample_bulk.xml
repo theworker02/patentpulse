@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE us-patent-grant SYSTEM "us-patent-grant-v45-2014-04-03.dtd" [ ]>
+<us-patent-grant lang="EN" dtd-version="v4.5 2014-04-03" file="US10000000B2-20180619.XML" status="PRODUCTION" id="us-patent-grant" country="US" date-produced="20180605" date-publ="20180619">
+  <us-bibliographic-data-grant>
+    <publication-reference>
+      <document-id>
+        <country>US</country>
+        <doc-number>10000000</doc-number>
+        <kind>B2</kind>
+        <date>20180619</date>
+      </document-id>
+    </publication-reference>
+    <application-reference appl-type="utility">
+      <document-id>
+        <country>US</country>
+        <doc-number>15123456</doc-number>
+        <date>20160501</date>
+      </document-id>
+    </application-reference>
+    <invention-title id="d2e43">Coordinated multi-agent sensor fusion system</invention-title>
+    <inventors>
+      <inventor sequence="00">
+        <addressbook>
+          <last-name>Chen</last-name>
+          <first-name>Ada</first-name>
+          <address>
+            <city>Austin</city>
+            <state>TX</state>
+            <country>US</country>
+          </address>
+        </addressbook>
+      </inventor>
+    </inventors>
+    <assignees>
+      <assignee>
+        <addressbook>
+          <orgname>Pulse Labs Inc.</orgname>
+        </addressbook>
+      </assignee>
+    </assignees>
+    <examiners>
+      <primary-examiner>
+        <last-name>Nguyen</last-name>
+        <first-name>Kim</first-name>
+      </primary-examiner>
+    </examiners>
+    <us-related-documents>
+      <continuation>
+        <relation>
+          <parent-doc>
+            <document-id>
+              <country>US</country>
+              <doc-number>14000000</doc-number>
+              <date>20140101</date>
+            </document-id>
+          </parent-doc>
+        </relation>
+      </continuation>
+    </us-related-documents>
+    <us-references-cited>
+      <us-citation>
+        <patcit num="00001">
+          <document-id>
+            <country>US</country>
+            <doc-number>5555555</doc-number>
+            <kind>A</kind>
+            <date>19960102</date>
+          </document-id>
+        </patcit>
+        <category>cited by examiner</category>
+      </us-citation>
+      <us-citation>
+        <nplcit num="00002">
+          <othercit>Smith, Sensor Fusion Review, 2014.</othercit>
+        </nplcit>
+        <category>cited by applicant</category>
+      </us-citation>
+    </us-references-cited>
+    <classifications-ipcr>
+      <classification-ipcr>
+        <section>G</section>
+        <class>06</class>
+        <subclass>F</subclass>
+        <main-group>16</main-group>
+        <subgroup>245</subgroup>
+      </classification-ipcr>
+    </classifications-ipcr>
+    <classifications-cpc>
+      <main-cpc>
+        <classification-cpc>
+          <section>G</section>
+          <class>06</class>
+          <subclass>F</subclass>
+          <main-group>16</main-group>
+          <subgroup>245</subgroup>
+          <classification-cpc-text>G06F 16/245</classification-cpc-text>
+        </classification-cpc>
+      </main-cpc>
+      <further-cpc>
+        <classification-cpc>
+          <classification-cpc-text>G06N 20/00</classification-cpc-text>
+        </classification-cpc>
+      </further-cpc>
+    </classifications-cpc>
+  </us-bibliographic-data-grant>
+  <abstract id="abstract">
+    <p id="p-0001" num="0000">A method coordinates heterogeneous sensor feeds using adaptive weighting.</p>
+  </abstract>
+  <description id="description">
+    <?cross-reference-to-related-applications description="Cross Reference To Related Applications" end="lead"?>
+    <heading level="2" id="h-0001">CROSS-REFERENCE TO RELATED APPLICATIONS</heading>
+    <p id="p-0002" num="0001">This application claims priority to provisional application 62/000,000.</p>
+    <?cross-reference-to-related-applications description="Cross Reference To Related Applications" end="tail"?>
+    <?summary-of-invention description="Summary of Invention" end="lead"?>
+    <heading level="2" id="h-0002">SUMMARY</heading>
+    <p id="p-0003" num="0002">Embodiments fuse LiDAR and IMU streams with latency bounds &lt; 10 ms.</p>
+    <?summary-of-invention description="Summary of Invention" end="tail"?>
+    <?detailed-description description="Detailed Description" end="lead"?>
+    <heading level="2" id="h-0003">DETAILED DESCRIPTION</heading>
+    <p id="p-0004" num="0003">FIG. 1 shows module A connected to module B via bus 120.</p>
+    <?detailed-description description="Detailed Description" end="tail"?>
+  </description>
+  <claims id="claims">
+    <claim id="CLM-00001" num="00001">
+      <claim-text>1. A method comprising receiving a first sensor stream and a second sensor stream.</claim-text>
+    </claim>
+    <claim id="CLM-00002" num="00002">
+      <claim-text>2. The method of claim 1, wherein the first sensor stream comprises LiDAR point clouds.</claim-text>
+    </claim>
+  </claims>
+</us-patent-grant>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE us-patent-grant SYSTEM "us-patent-grant-v45-2014-04-03.dtd" [ ]>
+<us-patent-grant lang="EN" dtd-version="v4.5 2014-04-03" file="US10000001B2-20180619.XML" status="PRODUCTION" id="us-patent-grant" country="US" date-produced="20180605" date-publ="20180619">
+  <us-bibliographic-data-grant>
+    <publication-reference>
+      <document-id>
+        <country>US</country>
+        <doc-number>10000001</doc-number>
+        <kind>B2</kind>
+        <date>20180619</date>
+      </document-id>
+    </publication-reference>
+    <application-reference appl-type="utility">
+      <document-id>
+        <country>US</country>
+        <doc-number>15999999</doc-number>
+        <date>20160715</date>
+      </document-id>
+    </application-reference>
+    <invention-title id="d2e43">Memory-efficient XML streaming parser</invention-title>
+    <classifications-cpc>
+      <main-cpc>
+        <classification-cpc>
+          <classification-cpc-text>G06F 16/2458</classification-cpc-text>
+        </classification-cpc>
+      </main-cpc>
+    </classifications-cpc>
+  </us-bibliographic-data-grant>
+  <abstract id="abstract">
+    <p id="p-0001" num="0000">Systems parse concatenated patent XML without loading entire archives into RAM.</p>
+  </abstract>
+  <description id="description">
+    <p id="p-0002" num="0001">The parser iterates document boundaries and clears element trees per record.</p>
+  </description>
+  <claims id="claims">
+    <claim id="CLM-00001" num="00001">
+      <claim-text>1. A non-transitory computer-readable medium storing instructions.</claim-text>
+    </claim>
+  </claims>
+</us-patent-grant>
