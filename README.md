@@ -1,8 +1,8 @@
 # PatentPulse
 
-PatentPulse is a locally owned, continuously growing corpus of USPTO patent grants and published applications. It downloads official weekly XML dumps, stream-parses them without loading an archive into memory, and writes normalized SQLite and JSON Lines outputs for search, tokenization, embeddings, and model training.
+PatentPulse is a locally owned, **continuously growing** 1.6 TB corpus of USPTO patent grants and published applications. It downloads official weekly XML dumps, stream-parses them without loading an archive into memory, and writes normalized SQLite and JSON Lines outputs for search, tokenization, embeddings, and model training.
 
-It is a local data project, not a Python package intended for publication.
+It is a local data project, not a Python package intended for publication. **(NOT on package index)**
 
 ## Dataset at a glance
 
