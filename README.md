@@ -4,6 +4,14 @@ PatentPulse is a locally owned, **continuously growing** 1.6 TB corpus of USPTO 
 
 It is a local data project, not a Python package intended for publication. **(NOT on package index)**
 
+**Published dataset:** a versioned, immutable Parquet snapshot is available on the Hugging Face Hub at [theworker02/patentpulse](https://huggingface.co/datasets/theworker02/patentpulse).
+
+```python
+from datasets import load_dataset
+
+ds = load_dataset("theworker02/patentpulse")
+```
+
 ## Dataset at a glance
 
 | Property | Value |
@@ -14,6 +22,7 @@ It is a local data project, not a Python package intended for publication. **(NO
 | Primary text | Title, abstract, claims, cleaned description |
 | Core labels | Document type, publication date, CPC |
 | Backfill coverage | Tracked in `data/manifest.json` |
+| Published snapshot | [`theworker02/patentpulse`](https://huggingface.co/datasets/theworker02/patentpulse) on Hugging Face |
 
 Run the current inventory:
 

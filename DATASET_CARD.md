@@ -13,6 +13,18 @@ The project is inspired by the field structure and data-card conventions of [The
 
 ## Hugging Face distribution
 
+The published snapshot lives on the Hugging Face Hub:
+**[theworker02/patentpulse](https://huggingface.co/datasets/theworker02/patentpulse)**.
+It contains 5,929,464 records across temporal `train`, `validation`, and `test`
+splits, stored as immutable Parquet shards with a `release_manifest.json` that
+records the canonical content digest.
+
+```python
+from datasets import load_dataset
+
+ds = load_dataset("theworker02/patentpulse")
+```
+
 The local append-only JSONL is an ingestion artifact, not a distributable Hub
 format: older rows can have a smaller field set and local provenance paths. Use
 `python -m patentpulse.hf_release export` to create an immutable Parquet
