@@ -8,9 +8,9 @@ to Hugging Face.
 
 1. Finish the ingestion manifest. The release command intentionally stops when
    any source is `pending`, `running`, or `failed`.
-2. Use a separate volume with enough free space for the compressed release plus
-   at least 64 GB of operating headroom. The command estimates this requirement
-   conservatively and refuses an unsafe full conversion.
+2. Use a separate volume with enough free space for the compressed release. The
+   command estimates the projected output from the input size, adds 20% working
+   headroom, enforces a 2 GB minimum, and refuses an unsafe full conversion.
 3. Confirm the distribution terms for the intended jurisdiction. The generated
    card uses the Hugging Face `other` license value because USPTO records can
    include third-party material and the USPTO reserves international rights.
@@ -56,7 +56,8 @@ data/
 ```
 
 Each Parquet shard has one explicit schema, uses Zstandard compression, targets
-5 GB or less, and uses 64 MB row groups. Source paths are reduced to archive
+5 GB, and uses 64 MB row groups. A completed shard can exceed its target by at
+most one row group because Parquet row groups are atomic. Source paths are reduced to archive
 filenames so local usernames and workstation directories are not published. The
 export also deduplicates append-only retry rows globally by document type,
 publication identifier, application number, and publication date.

@@ -22,7 +22,8 @@ dataset snapshots use Hugging Face's `other` label and the data-rights notice.
 
 ## 2. Build and validate an immutable snapshot
 
-Use an empty directory on a volume with enough free space:
+Use an empty directory on a volume with enough free space. The exporter checks
+the estimated compressed output plus working headroom before writing shards:
 
 ```powershell
 python -m patentpulse.hf_release export `

@@ -18,7 +18,11 @@ from patentpulse.manifest import IngestManifest
 
 DEFAULT_MAX_SHARD_BYTES = 5_000_000_000
 DEFAULT_ROW_GROUP_BYTES = 64_000_000
-MIN_FREE_SPACE_BYTES = 64_000_000_000
+# Keep a meaningful floor for any export, then scale from the projected output
+# size. A fixed 64 GB minimum made small validation releases and their tests
+# fail on otherwise suitable machines.
+MIN_FREE_SPACE_BYTES = 2_000_000_000
+OUTPUT_HEADROOM_MULTIPLIER = 1.2
 DEFAULT_EXPECTED_COMPRESSION_RATIO = 0.25
 
 TEXT_FIELDS = (
@@ -369,7 +373,8 @@ def assert_manifest_complete(data_root: Path) -> None:
 def _required_free_space(source_bytes: int, expected_compression_ratio: float) -> int:
     if not 0 < expected_compression_ratio <= 1:
         raise ValueError("expected_compression_ratio must be in the interval (0, 1].")
-    return max(MIN_FREE_SPACE_BYTES, math.ceil(source_bytes * expected_compression_ratio) + MIN_FREE_SPACE_BYTES)
+    estimated_output_bytes = math.ceil(source_bytes * expected_compression_ratio)
+    return max(MIN_FREE_SPACE_BYTES, math.ceil(estimated_output_bytes * OUTPUT_HEADROOM_MULTIPLIER))
 
 
 def _check_output_space(source_path: Path, output_dir: Path, *, max_records: int | None, expected_compression_ratio: float) -> None:
@@ -422,7 +427,7 @@ PatentPulse is a provenance-preserving corpus of USPTO grants and published pate
 - Splits: train {counts.get("train", 0):,}; validation {counts.get("validation", 0):,}; test {counts.get("test", 0):,}; unspecified {counts.get("unspecified", 0):,}
 - Source export: `{summary.source_file}` ({summary.source_bytes:,} bytes)
 - Canonical record digest: `{summary.canonical_sha256}`
-- Shard ceiling: {summary.max_shard_bytes / 1e9:g} GB
+- Shard target: {summary.max_shard_bytes / 1e9:g} GB (a shard may exceed the target by one 64 MB row group)
 
 ## Schema and splits
 
@@ -559,8 +564,11 @@ def validate_release(output_dir: Path, *, max_shard_bytes: int = DEFAULT_MAX_SHA
         raise ReleaseValidationError("Release contains no Parquet shards.")
     expected_schema, records_by_split = hf_arrow_schema(), Counter[str]()
     for path in files:
-        if path.stat().st_size > max_shard_bytes:
-            raise ReleaseValidationError(f"Shard exceeds configured limit: {path}")
+        # Parquet row groups are atomic. The writer closes a shard after a
+        # completed row group reaches the target, so the final file can exceed
+        # that target by at most one row group.
+        if path.stat().st_size > max_shard_bytes + DEFAULT_ROW_GROUP_BYTES:
+            raise ReleaseValidationError(f"Shard exceeds configured limit plus row-group allowance: {path}")
         parquet = pq.ParquetFile(path)
         if not parquet.schema_arrow.equals(expected_schema, check_metadata=False):
             raise ReleaseValidationError(f"Schema mismatch in {path}")
