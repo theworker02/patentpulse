@@ -1,5 +1,20 @@
 # Dataset Card: PatentPulse
 
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/theworker02/patentpulse/main/assets/patentpulse-logo.svg" alt="PatentPulse" width="440" />
+
+<h1>PatentPulse — Dataset Card</h1>
+
+<p>
+  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><img alt="Hugging Face dataset" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-dataset-06B6D4"></a>
+  <a href="https://github.com/theworker02/patentpulse"><img alt="GitHub" src="https://img.shields.io/badge/GitHub-pipeline-181717?logo=github&logoColor=white"></a>
+  <img alt="Records" src="https://img.shields.io/badge/records-5.93M-4F46E5">
+  <img alt="Coverage" src="https://img.shields.io/badge/coverage-2018%E2%80%932026-06B6D4">
+</p>
+
+</div>
+
 ## Dataset summary
 
 PatentPulse is a local, provenance-preserving corpus assembled from official USPTO weekly XML releases:

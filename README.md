@@ -1,16 +1,56 @@
-# PatentPulse
+<div align="center">
 
-PatentPulse is a locally owned, **continuously growing** 1.6 TB corpus of USPTO patent grants and published applications. It downloads official weekly XML dumps, stream-parses them without loading an archive into memory, and writes normalized SQLite and JSON Lines outputs for search, tokenization, embeddings, and model training.
+<img src="assets/patentpulse-logo.svg" alt="PatentPulse" width="440" />
 
-It is a local data project, not a Python package intended for publication. **(NOT on package index)**
+<h1>PatentPulse</h1>
 
-**Published dataset:** a versioned, immutable Parquet snapshot is available on the Hugging Face Hub at [theworker02/patentpulse](https://huggingface.co/datasets/theworker02/patentpulse).
+<p><strong>A continuously growing, provenance-preserving corpus of USPTO patent grants and published applications.</strong><br/>
+Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and normalized into SQLite, JSON Lines, and a publishable Parquet snapshot.</p>
 
-```python
-from datasets import load_dataset
+<p>
+  <a href="https://github.com/theworker02/patentpulse/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/theworker02/patentpulse?sort=semver&label=release&color=4F46E5"></a>
+  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><img alt="Hugging Face dataset" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-dataset-06B6D4"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/code%20license-MIT-green"></a>
+  <a href="DATA_LICENSE.md"><img alt="Data license: other" src="https://img.shields.io/badge/data%20license-other-lightgrey"></a>
+  <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
+  <img alt="Records" src="https://img.shields.io/badge/records-5.93M-4F46E5">
+  <img alt="Coverage" src="https://img.shields.io/badge/coverage-2018%E2%80%932026-06B6D4">
+  <img alt="Format" src="https://img.shields.io/badge/format-Parquet%20%7C%20SQLite%20%7C%20JSONL-orange">
+</p>
 
-ds = load_dataset("theworker02/patentpulse")
-```
+<p>
+  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><strong>Dataset on Hugging Face</strong></a> ·
+  <a href="DATASET_CARD.md">Dataset card</a> ·
+  <a href="docs/HF_RELEASE.md">Release exporter</a> ·
+  <a href="docs/RELEASING.md">Release checklist</a>
+</p>
+
+</div>
+
+---
+
+## Table of contents
+
+- [What PatentPulse is](#what-patentpulse-is)
+- [Dataset at a glance](#dataset-at-a-glance)
+- [Use the published dataset](#use-the-published-dataset)
+- [Why weekly dumps matter](#why-weekly-dumps-matter)
+- [Quick start](#quick-start)
+- [Continue the official backfill](#continue-the-official-backfill)
+- [Outputs](#outputs)
+- [Building a Hugging Face release](#hugging-face-release)
+- [Architecture](#architecture)
+- [Command reference](#command-reference)
+- [Quality and validation](#quality-and-validation)
+- [Source and licensing](#source-and-licensing)
+- [Citation](#citation)
+- [Related work](#related-work)
+
+## What PatentPulse is
+
+PatentPulse is a locally owned, **continuously growing** corpus (on the order of 1.6 TB of raw source archives) of USPTO patent grants and published applications. It downloads official weekly XML dumps, stream-parses them without loading an archive into memory, and writes normalized SQLite and JSON Lines outputs for search, tokenization, embeddings, and model training.
+
+The repository is a **local data pipeline plus a published dataset**, not a Python package on any index. The pipeline lives here on GitHub; the immutable, ready-to-use snapshot lives on the Hugging Face Hub.
 
 ## Dataset at a glance
 
@@ -18,13 +58,35 @@ ds = load_dataset("theworker02/patentpulse")
 | --- | --- |
 | Sources | USPTO Patent Grant Full-Text XML (`PTGRXML`) and Patent Application Full-Text XML (`APPXML`) |
 | Cadence | Weekly — grants on Tuesday; applications on Thursday |
-| Storage | SQLite + UTF-8 JSON Lines |
+| Records (published snapshot) | 5,929,464 unique records |
+| Temporal splits | train 4,676,062 · validation 772,091 · test 481,311 |
+| Publication coverage | 2018 through 2026 (backfill in progress) |
+| Local storage | SQLite + UTF-8 JSON Lines |
+| Published format | Zstandard-compressed Parquet shards (44 files) |
 | Primary text | Title, abstract, claims, cleaned description |
-| Core labels | Document type, publication date, CPC |
+| Core labels | Document type, publication date, CPC / IPC |
 | Backfill coverage | Tracked in `data/manifest.json` |
 | Published snapshot | [`theworker02/patentpulse`](https://huggingface.co/datasets/theworker02/patentpulse) on Hugging Face |
 
-Run the current inventory:
+## Use the published dataset
+
+The fastest way to use PatentPulse is the immutable Parquet snapshot on the Hugging Face Hub — no ingestion or API key required.
+
+```python
+from datasets import load_dataset
+
+# Full corpus with temporal splits
+ds = load_dataset("theworker02/patentpulse")
+print(ds)  # train / validation / test
+
+# Stream instead of downloading everything
+stream = load_dataset("theworker02/patentpulse", split="train", streaming=True)
+print(next(iter(stream))["invention_title"])
+```
+
+Each row carries canonical PatentPulse fields (`abstract_text`, `claims_text`, `description_text`) plus HUPD-compatible aliases (`title`, `abstract`, `claims`, `full_description`, `cpc_labels`). See the [dataset card](DATASET_CARD.md) for the full field contract.
+
+Run the current local inventory (when working from the pipeline):
 
 ```powershell
 python -m patentpulse.ingest status
@@ -144,6 +206,20 @@ schema.py     batches SQLite and JSONL writes
 manifest.py   makes backfill resumable and auditable
 ```
 
+## Command reference
+
+All commands are modules under the `patentpulse` package.
+
+| Command | Purpose |
+| --- | --- |
+| `python -m patentpulse.ingest status` | Show manifest coverage and database row counts |
+| `python -m patentpulse.ingest sync --source both --format both` | Download and ingest remaining weekly dumps (resumable) |
+| `python -m patentpulse.ingest run --format both` | Ingest any local archives already present under `data/raw/` |
+| `python -m patentpulse.parse --input <file> --output <db> --format sqlite` | Parse a single XML/ZIP/TAR/GZIP file |
+| `python -m patentpulse.hf_release export --input <jsonl> --output <dir>` | Build a validated, publishable Parquet snapshot |
+
+Ingestion is crash-safe and resumable: it uses atomic manifest writes, recovers stale in-progress entries, holds a process lock to prevent overlapping runs, and validates download sizes before committing a file.
+
 ## Quality and validation
 
 ```powershell
@@ -165,6 +241,20 @@ document content or jurisdictions.
 
 For a release checklist, including GitHub tagging and the explicit Hugging Face
 upload command, see [docs/RELEASING.md](docs/RELEASING.md).
+
+## Citation
+
+If you use PatentPulse, please cite the USPTO bulk sources and this project. Machine-readable metadata is in [CITATION.cff](CITATION.cff).
+
+```bibtex
+@software{patentpulse,
+  title  = {PatentPulse: A USPTO full-text patent corpus and ingestion pipeline},
+  author = {theworker02},
+  year   = {2026},
+  url    = {https://github.com/theworker02/patentpulse},
+  note   = {Dataset: https://huggingface.co/datasets/theworker02/patentpulse}
+}
+```
 
 ## Related work
 

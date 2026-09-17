@@ -1,0 +1,29 @@
+<svg width="640" height="160" viewBox="0 0 640 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="PatentPulse">
+  <defs>
+    <linearGradient id="pp-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Emblem: a document mark with a pulse line -->
+  <g transform="translate(24,24)">
+    <rect x="0" y="0" width="112" height="112" rx="24" fill="url(#pp-grad)"/>
+    <!-- document sheet -->
+    <rect x="30" y="20" width="52" height="72" rx="8" fill="#FFFFFF" opacity="0.96"/>
+    <!-- folded corner -->
+    <path d="M66 20 H82 V36 Z" fill="#C7D2FE"/>
+    <!-- pulse / heartbeat line -->
+    <path d="M34 62 H46 L52 46 L60 78 L66 58 H78"
+          fill="none" stroke="#4F46E5" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(160,0)">
+    <text x="0" y="72" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="52" font-weight="700" fill="#111827">Patent<tspan fill="#4F46E5">Pulse</tspan></text>
+    <text x="2" y="104" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif"
+          font-size="20" font-weight="500" fill="#6B7280" letter-spacing="0.5">USPTO full-text patent corpus</text>
+  </g>
+</svg>
