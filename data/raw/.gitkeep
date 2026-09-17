@@ -1,0 +1,4 @@
+# PatentPulse local dataset layout
+#
+# Drop USPTO weekly bulk ZIP/XML files here, then run:
+#   python -m patentpulse.ingest run

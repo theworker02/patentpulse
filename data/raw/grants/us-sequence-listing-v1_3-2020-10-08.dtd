@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DOCTYPE sequence-cwu [ -->
+
+<!-- DOCUMENT TYPE DEFINITION FOR UNITED STATES PATENT APPLICATION PUBLICATIONS
+Reference this DTD as PUBLIC "-//USPTO//DTD ICE SEQLST 1.3//EN"
+
+Contact: Narith Tith
+U.S. Patent and Trademark Office
+600 Dulany, MDW-5C87
+Alexandria, VA  22313
++1-571-272-5458
+narith.tith@uspto.gov
+
+-->
+
+<!-- ***** START REVISION HISTORY *****
+2020-10-08
+  1) Added ST.26 sequence listing model to existing 3 choices under sequence-cwu root element with following
+	 customizations from ST26SequenceListing_V1_3.dtd
+		a) Included SequenceTotalQuantity only from metadata section
+		b) Added SequenceData element 
+			- Changed INSDSeq_division to optional from required
+			- Removed INSDQualifier id attribute
+			- Removed NonEnglishQualifier_value element
+
+2004-03-09
+  1) Added element publication-reference to sequence-cwu.
+  2) Renamed DTD to us-sequence-listing-2004-03-09.dtd.
+  3) Public ID now "-//USPTO//DTD ICE SEQLST 1.2//EN".
+  4) Added ICE elements document-id, country, doc-number, kind, name, and date as required for element publication-reference.
+  5) s-1-iv content model of party changed to name.
+  6) s-1-ix-a content model of telephone changed to PCDATA.
+  7) s-2-ix-d removed highlight.
+
+2004-01-30 RTIS (JVN)
+  Added support for to allow pgwide, orient, and tabstyle table attributes in order to match 12/8/2003 changes to the 
+  ICE DTDs.
+
+2003-10-27 RTIS (JVN)
+
+  Created to capture US sequence listing data in old/new/table form as an external file for ICE implementation.
+  
+  Table only allows PCDATA in cells and title.
+  
+  The following st32 elements may exist within the sequence listing data and need to be converted to their ASCII
+  or ICE form for the ICE external file.
+
+	<!ELEMENT party  (name,organization-name?,address?) >
+	<!ELEMENT name  (name-prefix?,given-name?,middle-name?,family-name,name-suffix?) >
+	<!ELEMENT telephone  (#PCDATA) >
+	<!ELEMENT highlight  (literal | superscript | subscript | bold | italic | smallcaps | uline | duline)* >
+	<!ELEMENT doc-number  (#PCDATA) >
+	<!ELEMENT date  (#PCDATA) >
+
+
+	ST32		ICE
+	party		drop organization-name & address (not populated), convert name to text string
+	name		convert to text string
+	telephone	convert to text string
+	highlight	drop all highlight tags
+	doc-number	convert to text string
+	date		convert to text string
+  
+  
+********** END REVISION HISTORY ********** -->
+
+<!-- DTD OASIS Open XML Exchange Table Model.  
+       Maintained by OASIS; download from:
+       http://oasis-open.org/specs/soextblx.dtd
+       Note that the FPI in soextblx.dtd refers to itself as 'calstblx'.  
+       That convention has been followed here.
+-->
+<!--  create content for title element in table  -->
+<!ENTITY % title "<!ELEMENT title (#PCDATA) > ">
+%title;
+
+<!--override OASIS Exchange <entry> model -->
+<!ENTITY % tbl.entry.mdl "(#PCDATA) ">
+
+<!--import OASIS Exchange model -->
+<!ENTITY % calstblx PUBLIC "-//OASIS//DTD XML Exchange Table Model 19990315//EN" 
+                           "soextblx.dtd">
+
+<!ENTITY % yesorno  "NMTOKEN" >
+<!ENTITY % tbl.table.att        " pgwide      %yesorno;       #IMPLIED
+                                  orient      (port | land)   #IMPLIED
+                                  tabstyle    NMTOKEN         #IMPLIED">
+%calstblx;
+
+<!ELEMENT sequence-cwu  (publication-reference, number,(sequence-list-old-rules | sequence-list-new-rules | table | ST26SequenceListing)) >
+<!ATTLIST sequence-cwu
+               id  ID    #REQUIRED
+               st32-name  CDATA    #FIXED "SEQLST-US" >
+<!ELEMENT number  (#PCDATA) >
+<!ELEMENT sequence-list-old-rules  (s-1,s-2+) >
+<!ELEMENT s-1  (s-1-iii,s-1-iv?,s-1-v?,s-1-viii?,s-1-ix?) >
+<!ELEMENT s-1-iii  (#PCDATA) >
+<!ELEMENT s-1-iv  (name) >
+<!ELEMENT s-1-v  (s-1-v-a,s-1-v-b,s-1-v-c,s-1-v-d) >
+<!ELEMENT s-1-v-a  (#PCDATA) >
+<!ELEMENT s-1-v-b  (#PCDATA) >
+<!ELEMENT s-1-v-c  (#PCDATA) >
+<!ELEMENT s-1-v-d  (#PCDATA) >
+<!ELEMENT s-1-viii  (s-1-viii-a,s-1-viii-b,s-1-viii-c) >
+<!ELEMENT s-1-viii-a  (name) >
+<!ELEMENT s-1-viii-b  (#PCDATA) >
+<!ELEMENT s-1-viii-c  (#PCDATA) >
+<!ELEMENT s-1-ix  (s-1-ix-a,s-1-ix-b,s-1-ix-c) >
+<!ELEMENT s-1-ix-a  (#PCDATA) >
+<!ELEMENT s-1-ix-b  (#PCDATA) >
+<!ELEMENT s-1-ix-c  (#PCDATA) >
+<!ELEMENT s-2  (s-2-i,s-2-ii*,s-2-iii?,s-2-iv?,s-2-v*,s-2-vi?,s-2-vii?,s-2-viii?, s-2-ix*,s-2-x*,s-2-xi) >
+<!ATTLIST s-2 seq-no  CDATA    #REQUIRED  >
+<!ELEMENT s-2-i  (s-2-i-a?,s-2-i-b,s-2-i-c?,s-2-i-d) >
+<!ELEMENT s-2-i-a  (#PCDATA) >
+<!ELEMENT s-2-i-b  (#PCDATA) >
+<!ELEMENT s-2-i-c  (#PCDATA) >
+<!ELEMENT s-2-i-d  (#PCDATA) >
+<!ELEMENT s-2-ii  (s-2-ii-mt,s-2-ii-a?) >
+<!ELEMENT s-2-ii-mt  (#PCDATA) >
+<!ELEMENT s-2-ii-a  (#PCDATA) >
+<!ELEMENT s-2-iii  (#PCDATA) >
+<!ELEMENT s-2-iv  (#PCDATA) >
+<!ELEMENT s-2-v  (#PCDATA) >
+<!ELEMENT s-2-vi  (s-2-vi-a?,s-2-vi-b?,s-2-vi-c?,s-2-vi-d?,s-2-vi-e?,s-2-vi-f?, s-2-vi-g?,s-2-vi-h?,s-2-vi-i?) >
+<!ELEMENT s-2-vi-a  (#PCDATA) >
+<!ELEMENT s-2-vi-b  (#PCDATA) >
+<!ELEMENT s-2-vi-c  (#PCDATA) >
+<!ELEMENT s-2-vi-d  (#PCDATA) >
+<!ELEMENT s-2-vi-e  (#PCDATA) >
+<!ELEMENT s-2-vi-f  (#PCDATA) >
+<!ELEMENT s-2-vi-g  (#PCDATA) >
+<!ELEMENT s-2-vi-h  (#PCDATA) >
+<!ELEMENT s-2-vi-i  (#PCDATA) >
+<!ELEMENT s-2-vii  (s-2-vii-a?,s-2-vii-b?) >
+<!ELEMENT s-2-vii-a  (#PCDATA) >
+<!ELEMENT s-2-vii-b  (#PCDATA) >
+<!ELEMENT s-2-viii  (s-2-viii-a?,s-2-viii-b?,s-2-viii-c?) >
+<!ELEMENT s-2-viii-a  (#PCDATA) >
+<!ELEMENT s-2-viii-b  (#PCDATA) >
+<!ELEMENT s-2-viii-c  (#PCDATA) >
+<!ELEMENT s-2-ix  (s-2-ix-a?,s-2-ix-b?,s-2-ix-c?,s-2-ix-d?) >
+<!ELEMENT s-2-ix-a  (#PCDATA) >
+<!ELEMENT s-2-ix-b  (#PCDATA) >
+<!ELEMENT s-2-ix-c  (#PCDATA) >
+<!ELEMENT s-2-ix-d  (#PCDATA) >
+<!ELEMENT s-2-x  (s-2-x-a?,s-2-x-b?,s-2-x-c?,s-2-x-d?,s-2-x-e?,s-2-x-f?,s-2-x-g?,s-2-x-h?, s-2-x-i?,s-2-x-j?,s-2-x-k?) >
+<!ELEMENT s-2-x-a  (name+) >
+<!ELEMENT s-2-x-b  (#PCDATA) >
+<!ELEMENT s-2-x-c  (#PCDATA) >
+<!ELEMENT s-2-x-d  (#PCDATA) >
+<!ELEMENT s-2-x-e  (#PCDATA) >
+<!ELEMENT s-2-x-f  (#PCDATA) >
+<!ELEMENT s-2-x-g  (#PCDATA | date)* >
+<!ELEMENT s-2-x-h  (doc-number) >
+<!ELEMENT s-2-x-i  (date) >
+<!ELEMENT s-2-x-j  (date) >
+<!ELEMENT s-2-x-k  (#PCDATA) >
+<!ELEMENT s-2-xi  (#PCDATA) >
+<!ELEMENT sequence-list-new-rules  (s100,(s200,s300?,s400)+) >
+<!ELEMENT s100  (s130?,s160,s170?) >
+<!ELEMENT s130  (#PCDATA) >
+<!ELEMENT s160  (#PCDATA) >
+<!ELEMENT s170  (#PCDATA) >
+<!ELEMENT s200  (s210,s211,s212,s213,s220*) >
+<!ELEMENT s210  (#PCDATA) >
+<!ELEMENT s211  (#PCDATA) >
+<!ELEMENT s212  (#PCDATA) >
+<!ELEMENT s213  (#PCDATA) >
+<!ELEMENT s220  (s221?,s222?,s223?) >
+<!ELEMENT s221  (#PCDATA) >
+<!ELEMENT s222  (#PCDATA) >
+<!ELEMENT s223  (#PCDATA) >
+<!ELEMENT s300  (s301?,s302?,s303?,s304?,s305?,s306?,s307?,s308?,s309?,s310?,s311?, s313?) >
+<!ELEMENT s301  (name+) >
+<!ELEMENT s302  (#PCDATA) >
+<!ELEMENT s303  (#PCDATA) >
+<!ELEMENT s304  (#PCDATA) >
+<!ELEMENT s305  (#PCDATA) >
+<!ELEMENT s306  (#PCDATA) >
+<!ELEMENT s307  (#PCDATA | date)* >
+<!ELEMENT s308  (#PCDATA) >
+<!ELEMENT s309  (date) >
+<!ELEMENT s310  (doc-number) >
+<!ELEMENT s311  (date) >
+<!ELEMENT s313  (#PCDATA) >
+<!ELEMENT s400  (#PCDATA) >
+
+<!--Identification of a published patent document.-->
+<!ELEMENT publication-reference (document-id)>
+
+<!--Document identification refers to patents (and patent applications) only. See WIPO ST.14.-->
+<!ELEMENT document-id (country , doc-number , kind? , name? , date?)>
+<!ATTLIST document-id  lang CDATA  #IMPLIED >
+
+<!--Country: use ST.3 country code, e.g. DE, FR, GB, NL, etc. Also includes EP, WO, etc.-->
+<!ELEMENT country (#PCDATA)>
+
+<!--The number of the referenced document.-->
+<!ELEMENT doc-number (#PCDATA)>
+
+<!--Document kind code; e.g. A1.-->
+<!ELEMENT kind (#PCDATA)>
+
+<!--Name: if no distinction or detail can be given. Also to be used for: personal (natural person) and corporate (legal entity) names.-->
+<!ELEMENT name (#PCDATA)>
+
+<!--Components of a date. Format: YYYYMMDD.-->
+<!ELEMENT date (#PCDATA)>
+
+<!-- ST26SequenceListing -->
+<!ELEMENT ST26SequenceListing (SequenceTotalQuantity, SequenceData+)>
+<!--SequenceTotalQuantity
+Indicates the total number of sequences in the document.
+Its purpose is to be quickly accessible for automatic processing.
+-->
+<!ELEMENT SequenceTotalQuantity (#PCDATA)>
+<!--SequenceData
+Data for individual Sequence.
+For intentionally skipped sequences see the ST.26 main body document.
+-->
+<!ELEMENT SequenceData (INSDSeq)>
+<!ATTLIST SequenceData
+               sequenceIDNumber CDATA #REQUIRED
+>
+<!--*******************************************************************************
+* INSD Part
+*******************************************************************************
+
+The purpose of the INSD part of this DTD is to define a customized DTD for sequence listings to support the work of IP offices while facilitating the data exchange with the public repositories.
+
+The INSD part is subset of the INSD DTD v1.5 and as such can only be used to generate an XML instance as it will not support the complete INSD structure.
+
+This part is based on:
+
+The International Nucleotide Sequence Database (INSD) collaboration.
+
+INSDSeq provides the elements of a sequence as presented in the GenBank/EMBL/DDBJ-style flatfile formats. Not all elements are used here.
+-->
+<!--INSDSeq
+Sequence data. Changed INSD V1.5 DTD elements, INSDSeq_division and INSDSeq_sequence from optional to mandatory per business requirements. 
+-->
+<!ELEMENT INSDSeq (INSDSeq_length, INSDSeq_moltype, INSDSeq_division?, INSDSeq_other-seqids?, INSDSeq_feature-table?, INSDSeq_sequence)>
+<!--INSDSeq_length
+The length of the sequence. INSDSeq_length allows only integer.
+-->
+<!ELEMENT INSDSeq_length (#PCDATA)>
+<!--INSDSeq_moltype
+Admissible values: DNA, RNA, AA
+-->
+<!ELEMENT INSDSeq_moltype (#PCDATA)>
+<!--INSDSeq_division
+Indication that a sequence is related to a patent application. Must be populated with the value PAT.
+-->
+<!ELEMENT INSDSeq_division (#PCDATA)>
+<!--INSDSeq_other-seqids
+In the context of data exchange with database providers, the Patent Offices should populate for each sequence the element INSDSeq_other-seqids with one INSDSeqid containing a reference to the corresponding published patent and the sequence identification.
+-->
+<!ELEMENT INSDSeq_other-seqids (INSDSeqid?)>
+<!--INSDSeq_feature-table
+Information on the location and roles of various regions within a particular sequence. Whenever the element INSDSeq_feature-table is used, it must contain at least one feature.
+-->
+<!ELEMENT INSDSeq_feature-table (INSDFeature+)>
+<!--INSDSeq_sequence
+The residues of the sequence. The sequence must not contain numbers, punctuation or whitespace characters.
+-->
+<!ELEMENT INSDSeq_sequence (#PCDATA)>
+<!--INSDSeqid
+Intended for the use of Patent Offices in data exchange only.
+
+Format:
+pat|{office code}|{publication number}|{document kind code}|{Sequence identification number}
+
+where office code is the code of the IP office publishing the patent document, publication number is the publication number of the application or patent, document kind code is the letter codes to distinguish patent documents as defined in ST.16 and Sequence identification number is the number of the sequence in that application or patent
+
+Example:
+pat|WO|2013999999|A1|123456
+
+This represents the 123456th sequence from WO patent publication No. 2013999999 (A1)
+-->
+<!ELEMENT INSDSeqid (#PCDATA)>
+<!--INSDFeature
+Description of one feature.
+-->
+<!ELEMENT INSDFeature (INSDFeature_key, INSDFeature_location, INSDFeature_quals?)>
+<!--INSDFeature_key
+A word or abbreviation indicating a feature.
+-->
+<!ELEMENT INSDFeature_key (#PCDATA)>
+<!--INSDFeature_location
+Region of the presented sequence which corresponds to the feature.
+-->
+<!ELEMENT INSDFeature_location (#PCDATA)>
+<!--INSDFeature_quals
+List of qualifiers containing auxiliary information about a feature.
+-->
+<!ELEMENT INSDFeature_quals (INSDQualifier+)>
+<!--INSDQualifier
+Additional information about a feature.
+For coding sequences and variants see the ST.26 main body document.
+-->
+<!ELEMENT INSDQualifier (INSDQualifier_name, INSDQualifier_value?)>
+<!--INSDQualifier_name
+Name of the qualifier.
+-->
+<!ELEMENT INSDQualifier_name (#PCDATA)>
+<!--INSDQualifier_value
+Value of the qualifier. Where the qualifier is language dependent its value must be in the English language and typed with the characters set forth in paragraph 40 (b).
+-->
+<!ELEMENT INSDQualifier_value (#PCDATA)>
+
+<!-- ] -->
