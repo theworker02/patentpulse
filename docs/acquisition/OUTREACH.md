@@ -64,5 +64,15 @@ Emails are sent only to addresses published on the company's own site as general
 | 2026-09-21 | Questel | prior | communication@questel.com | sent (earlier metrics pitch) |
 | 2026-09-21 | IFI CLAIMS | prior | info@ificlaims.com, sales@ificlaims.com | sent (earlier pitch) |
 | 2026-09-21 | LexisNexis IP | prior | ip@lexisnexis.com | sent (earlier pitch) |
+| 2026-09-21 | IFI CLAIMS | **1** | info@ificlaims.com, sales@ificlaims.com | sent Acquisition Release 1.0 teaser (`1a0c1bd0ef53951a`) |
+| 2026-09-21 | Amplified AI | **1** | info@amplified.ai | sent (`1a0c1bd10a30b84d`) |
+| 2026-09-21 | IPRally | **1** | sales@iprally.com | sent (`1a0c1bd1a627a758`) |
+| 2026-09-21 | PatSeer | **1** | sales@patseer.com | sent (`1a0c1bd1c8475d01`) |
+| 2026-09-21 | Minesoft | **1** | info@minesoft.com | sent (`1a0c1bd1fd3f9724`) |
+| 2026-09-21 | IP.com | **1** | sales@ip.com | sent (`1a0c1bd212d19a4d`) |
+| 2026-09-21 | Patsnap | **1** | demo-inquiry@patsnap.com | sent (`1a0c1bd23dcc9487`) |
+| 2026-09-21 | Anaqua | **1** | info@anaqua.com | sent (`1a0c1bd256e4b2e6`) |
+| 2026-09-21 | Questel | **1** | communication@questel.com | sent (`1a0c1bd257e8a8de`) |
+| 2026-09-21 | LexisNexis IP | **1** | ip@lexisnexis.com | sent (`1a0c1bd263649228`) |
 
-Wave 1 Acquisition Release 1.0 teaser sends are appended after freeze commit (same day follow-up with asset-transaction framing where a prior note already landed).
+Wave 1 used the asset-transaction teaser (no asking price). Waves 2–3 wait on interest density.
