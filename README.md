@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 <img src="assets/patentpulse-logo.svg" alt="PatentPulse" width="440" />
 
@@ -10,7 +10,7 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 <p>
   <a href="https://github.com/theworker02/patentpulse/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/theworker02/patentpulse?sort=semver&label=release&color=4F46E5"></a>
   <a href="https://huggingface.co/datasets/theworker02/patentpulse"><img alt="Hugging Face dataset" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-dataset-06B6D4"></a>
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/code%20license-MIT-green"></a>
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/code%20license-Proprietary%20(source--available)-green"></a>
   <a href="DATA_LICENSE.md"><img alt="Data license: other" src="https://img.shields.io/badge/data%20license-other-lightgrey"></a>
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="Records" src="https://img.shields.io/badge/records-5.93M-4F46E5">
@@ -19,9 +19,9 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 </p>
 
 <p>
-  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><strong>Dataset on Hugging Face</strong></a> ·
-  <a href="DATASET_CARD.md">Dataset card</a> ·
-  <a href="docs/HF_RELEASE.md">Release exporter</a> ·
+  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><strong>Dataset on Hugging Face</strong></a> Â·
+  <a href="DATASET_CARD.md">Dataset card</a> Â·
+  <a href="docs/HF_RELEASE.md">Release exporter</a> Â·
   <a href="docs/RELEASING.md">Release checklist</a>
 </p>
 
@@ -57,9 +57,9 @@ The repository is a **local data pipeline plus a published dataset**, not a Pyth
 | Property | Value |
 | --- | --- |
 | Sources | USPTO Patent Grant Full-Text XML (`PTGRXML`) and Patent Application Full-Text XML (`APPXML`) |
-| Cadence | Weekly — grants on Tuesday; applications on Thursday |
+| Cadence | Weekly â€” grants on Tuesday; applications on Thursday |
 | Records (published snapshot) | 5,929,464 unique records |
-| Temporal splits | train 4,676,062 · validation 772,091 · test 481,311 |
+| Temporal splits | train 4,676,062 Â· validation 772,091 Â· test 481,311 |
 | Publication coverage | 2018 through 2026 (backfill in progress) |
 | Local storage | SQLite + UTF-8 JSON Lines |
 | Published format | Zstandard-compressed Parquet shards (44 files) |
@@ -70,7 +70,7 @@ The repository is a **local data pipeline plus a published dataset**, not a Pyth
 
 ## Use the published dataset
 
-The fastest way to use PatentPulse is the immutable Parquet snapshot on the Hugging Face Hub — no ingestion or API key required.
+The fastest way to use PatentPulse is the immutable Parquet snapshot on the Hugging Face Hub â€” no ingestion or API key required.
 
 ```python
 from datasets import load_dataset
@@ -137,11 +137,11 @@ The sync loop retries rate limits and temporary source errors. It deletes an arc
 
 ```text
 data/
-├── manifest.json              # Per-week source inventory and ingestion status
-├── raw/                       # Temporary / manually supplied USPTO archives
-└── processed/
-    ├── patents.db             # Normalized SQLite corpus
-    └── patents.jsonl          # One dataset record per line
+â”œâ”€â”€ manifest.json              # Per-week source inventory and ingestion status
+â”œâ”€â”€ raw/                       # Temporary / manually supplied USPTO archives
+â””â”€â”€ processed/
+    â”œâ”€â”€ patents.db             # Normalized SQLite corpus
+    â””â”€â”€ patents.jsonl          # One dataset record per line
 ```
 
 Generated bulk data is intentionally ignored by Git.
@@ -189,20 +189,20 @@ the bounded smoke-export command, and the explicit upload step.
 
 ```text
 USPTO ODP weekly ZIP
-        │
-        ▼
+        â”‚
+        â–¼
 stream.py     splits concatenated XML documents
-        │
-        ▼
+        â”‚
+        â–¼
 extract.py    normalizes bibliographic and full-text fields
-        │
-        ▼
+        â”‚
+        â–¼
 clean.py      removes XML artifacts and repetitive front matter
-        │
-        ▼
+        â”‚
+        â–¼
 schema.py     batches SQLite and JSONL writes
-        │
-        ▼
+        â”‚
+        â–¼
 manifest.py   makes backfill resumable and auditable
 ```
 
@@ -262,3 +262,7 @@ PatentPulse follows the dataset-card conventions popularized by large Hugging Fa
 
 - it ingests the official weekly source archives directly and retains per-file provenance;
 - it includes both published applications and issued grants, with a resumable local backfill rather than a static snapshot.
+
+## License
+
+**Source-available proprietary** — evaluation under [LICENSE](./LICENSE); commercial / production use via [COMMERCIAL.md](./COMMERCIAL.md). See [LICENSE_TRANSITION_NOTICE.md](./LICENSE_TRANSITION_NOTICE.md).
