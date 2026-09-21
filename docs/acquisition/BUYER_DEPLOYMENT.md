@@ -1,174 +1,122 @@
 # Buyer deployment procedure
 
-Reproducible path from zero to a running PatentPulse corpus and optional Hub
-re-export. Validated command shapes match the repository README and
-`docs/HF_RELEASE.md`.
+Two supported ways to take PatentPulse. Path A is hours. Path B is a resumable backfill, not a greenfield parser project.
 
-## 0. Prerequisites
+Python 3.10+ is required. GPU is not.
 
-| Requirement | Notes |
-| --- | --- |
-| Python 3.10+ | 3.12 verified in this data room |
-| Disk | ≥ 220 GB to pull Hub Parquet; ≥ 1 TB recommended for JSONL + export headroom; multi-TB if `--keep-raw` |
-| USPTO ODP API key | Required only for live `ingest sync` |
-| Optional HF token | Only for private mirrors / upload |
+## Path A — consume the published snapshot
 
-```bash
-git clone https://github.com/theworker02/patentpulse.git
-cd patentpulse
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python -m pytest tests -q
-```
+Use this when the product need is text, CPC, citations, and temporal splits.
 
-## 1. Fastest path — use the published snapshot (no ingest)
+1. Confirm disk: **212 GB** if you materialize all 44 Parquet shards; streaming needs much less.
+2. Install `datasets` and `pyarrow` in the buyer's environment.
+3. Apply the Hub card fix in [HUB_VIEWER_FIX.md](HUB_VIEWER_FIX.md) if the Dataset Viewer still lists an empty `unspecified` split. Loading via `data_files` still works without the viewer.
+4. Load:
 
 ```python
 from datasets import load_dataset
 
 ds = load_dataset("theworker02/patentpulse")
+print(ds)
+print(ds["train"].features)
+
 stream = load_dataset("theworker02/patentpulse", split="train", streaming=True)
-print(next(iter(stream))["invention_title"])
+row = next(iter(stream))
+assert row["title"] == row["invention_title"]
 ```
 
-Verify digest:
+5. Verify identity against [metrics/dedup_and_errors.json](metrics/dedup_and_errors.json):
+   - train 4,676,062
+   - validation 772,091
+   - test 481,311
+   - total 5,929,464
+   - canonical digest `42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944`
+6. Keep `DATA_LICENSE.md` and `release_manifest.json` with any internal copy.
+7. Do not treat missing bibliographic extras as proof they were absent from the USPTO XML. See [QUALITY_METRICS.md](QUALITY_METRICS.md).
+
+Acceptance: splits match, aliases match on a sample, `source_file` contains only a filename.
+
+## Path B — own the pipeline and rebuild or extend
+
+Use this to continue the 2018–2026 backfill, re-extract historical weeks for inventor/examiner fields, or change the schema.
+
+### B1. Get the code
 
 ```bash
-# After downloading release_manifest.json from the Hub dataset root
-python - <<'PY'
-import json
-m = json.load(open("release_manifest.json"))
-assert m["records_written"] == 5929464
-assert m["canonical_sha256"] == "42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944"
-print("release identity OK")
-PY
+git clone https://github.com/theworker02/patentpulse.git
+cd patentpulse
+python -m pip install -r requirements.txt
+python -m pytest tests -q
 ```
 
-## 2. Local workspace bootstrap
+Expected: the current test suite passes (21 tests at the time of this packet).
+
+### B2. Reproduce this packet's measurements
 
 ```bash
-python -m patentpulse.ingest status
-# Creates data/ layout + empty manifest on first use when sync/run is invoked
+python -m patentpulse.metrics --output docs/acquisition/metrics --documents 2000
 ```
 
-Layout:
+Expected: unique-pass `documents_failed == 0`, replay pass writes 0 rows, Hub footer inventory returns 44 shards if the measurement host can reach `huggingface.co`.
 
-```text
-data/
-├── manifest.json
-├── raw/grants/
-├── raw/applications/
-└── processed/
-    ├── patents.db
-    └── patents.jsonl
-```
-
-## 3. Smoke ingest (offline fixture)
+### B3. Local smoke ingest (no USPTO key)
 
 ```bash
-python -m patentpulse.parse \
-  --input tests/fixtures/sample_bulk.xml \
-  --output data/processed/patents.db \
-  --format both
-
-python -m patentpulse.ingest status
-```
-
-Expect two grants in SQLite/JSONL with inventors, CPC, and citations populated
-from the fixture (current extractor).
-
-## 4. Continuous official backfill
-
-```bash
-export USPTO_API_KEY="..."   # PowerShell: $env:USPTO_API_KEY = "..."
-
-# Resume both product families; completed weeks are skipped
-python -m patentpulse.ingest sync --source both --format both
-
-# Or one family
-python -m patentpulse.ingest sync --source grant --format both
-python -m patentpulse.ingest sync --source application --format both
-```
-
-Operational guarantees:
-
-- Atomic manifest writes; stale `running` recovery; process lock
-- Download size validation before commit
-- Archive deleted after successful ingest unless `--keep-raw`
-- Rate-limit / transient error retries (`--max-fetch-errors`)
-
-Monitor:
-
-```bash
-python -m patentpulse.ingest status
-```
-
-## 5. Ingest already-downloaded archives
-
-```bash
-# Place ZIPs under data/raw/grants or data/raw/applications
+python -m patentpulse.ingest init
 python -m patentpulse.ingest run --format both
+python -m patentpulse.ingest status
+python examples/inspect_record.py
 ```
 
-## 6. Build an immutable Parquet release (buyer mirror)
+Expected: the seeded fixture parses into `data/processed/patents.db` and `patents.jsonl`.
 
-Do **not** upload raw JSONL, SQLite, or the local manifest.
+### B4. Official weekly backfill
+
+1. Register a USPTO Open Data Portal key at https://data.uspto.gov/apis/getting-started
+2. Export it only in the process environment. Do not commit it.
 
 ```bash
-# Smoke export
-python -m patentpulse.hf_release export \
-  --input data/processed/patents.jsonl \
-  --output /data/releases/patentpulse-smoke \
-  --max-records 10000
-
-python -m patentpulse.hf_release validate --release /data/releases/patentpulse-smoke
-
-# Full export (requires large free volume; exporter enforces headroom)
-python -m patentpulse.hf_release export \
-  --input data/processed/patents.jsonl \
-  --output /data/releases/patentpulse-vnext
-
-python -m patentpulse.hf_release validate --release /data/releases/patentpulse-vnext
+export USPTO_API_KEY="..."
+python -m patentpulse.ingest sync --source both --format both
 ```
 
-Upload (explicit, separate step):
+Behavior the buyer should rely on:
+
+- Completed weeks in `data/manifest.json` are skipped.
+- Stale `running` rows are recovered.
+- A process lock prevents overlapping syncs.
+- ZIP size is checked against the catalog.
+- Archives are deleted after a successful ingest unless `--keep-raw`.
+- Grant and application weeks interleave when `--source both`.
+
+### B5. Publish an internal snapshot
 
 ```bash
-hf upload <namespace>/patentpulse /data/releases/patentpulse-vnext --type dataset
+python -m patentpulse.hf_release export \
+  --input data/processed/patents.jsonl \
+  --output /data/releases/patentpulse-internal \
+  --skip-invalid-json
+
+python -m patentpulse.hf_release validate --release /data/releases/patentpulse-internal
 ```
 
-## 7. Production checklist
+The exporter refuses incomplete ingest manifests and insufficient disk. It will not list empty splits in the generated Hub card (fix landed with this packet).
 
-- [ ] `pytest` green on the deploy image
-- [ ] Secrets only in env / secret manager (`USPTO_API_KEY`, optional `HF_TOKEN`)
-- [ ] Dedicated volume for `data/processed` and release output
-- [ ] Cron/systemd timer for `ingest sync --source both --format both`
-- [ ] Alert on manifest `failed` entries and lock-file age
-- [ ] Retain `manifest.json` across regenerations
-- [ ] Re-run `scripts/compute_acquisition_metrics.py` after cutting a new release
-- [ ] Legal review of [DATA_LICENSE.md](../../DATA_LICENSE.md) for the buyer’s jurisdiction
+## Rights and operations
 
-## 8. Recovery drills
+- Code and original docs: MIT ([LICENSE](../../LICENSE)).
+- Snapshot reuse: [DATA_LICENSE.md](../../DATA_LICENSE.md) and USPTO terms. Label Hub copies `other`.
+- Do not upload `patents.db`, `patents.jsonl`, raw ZIPs, or `data/manifest.json` to a public dataset repo.
+- Pause scheduled ingest while cutting a snapshot ([docs/RELEASING.md](../RELEASING.md)).
 
-| Failure | Action |
+## Suggested acceptance tests for an acquired deployment
+
+| Test | Command or check |
 | --- | --- |
-| Crash mid-week | Re-run `sync`; completed files skip; in-progress recovered |
-| Corrupt download | Manifest marks failed; delete partial raw file; sync retries |
-| Overlapping jobs | Lock raises; stop the duplicate process |
-| Incomplete manifest at export | `hf_release export` refuses until sources are complete |
-
-## 9. Estimated engineering time saved
-
-For a team that does not already own a USPTO weekly XML platform:
-
-| If building in-house | Typical scope |
-| --- | --- |
-| ODP auth, catalog, checksummed download | weeks |
-| Concatenated XML streaming + schema drift | weeks |
-| Cleaning, CPC/claims/description normalization | weeks |
-| Resumable store + dedup + release packaging | weeks |
-| **PatentPulse transfer** | days to wire secrets, storage, and product adapters |
-
-Exact calendar time varies; the technical surface area above is what this
-repository already closes.
+| Unit | `python -m pytest tests -q` |
+| Metrics | `python -m patentpulse.metrics --documents 200` |
+| Fixture ingest | `ingest run` writes ≥2 rows |
+| Dedup | second parse of the same file writes 0 SQLite rows |
+| Snapshot identity | record counts and digest match the Hub manifest |
+| Path hygiene | `source_file` has no `/`, `\`, or drive letters |
+| Card | generated README has no `data/unspecified/*.parquet` glob unless that split has rows |

@@ -231,14 +231,17 @@ The test suite verifies concatenated-document splitting, text cleaning, bibliogr
 
 ## Acquisition data room
 
-Hard diligence metrics, corpus size calculations, dedup/error rates, a
-reproducible buyer deployment procedure, and outreach materials live under
-[`docs/acquisition/`](docs/acquisition/README.md).
+Hard diligence metrics (full Hub Parquet footer census), corpus sizes,
+dedup/error rates, a reproducible buyer deployment procedure, and outreach
+materials live under [`docs/acquisition/`](docs/acquisition/README.md).
 
 ```powershell
-python scripts/benchmark_ingestion.py --docs 2000 --output docs/acquisition/metrics/ingestion_benchmark.json
-python scripts/compute_acquisition_metrics.py --output docs/acquisition/metrics/acquisition_metrics.json
+python -m patentpulse.metrics --output docs/acquisition/metrics --documents 2000
 ```
+
+Legacy helpers `scripts/benchmark_ingestion.py` and
+`scripts/compute_acquisition_metrics.py` remain for the earlier sampled
+reports; prefer the metrics module above for the full measured packet.
 
 ## Source and licensing
 

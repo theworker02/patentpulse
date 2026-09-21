@@ -1,36 +1,128 @@
 {
-  "created_at": "2026-09-21T00:56:51.665290+00:00",
-  "host": {
-    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
-    "python": "3.12.3",
+  "collected_at": "2026-09-21T01:04:06+00:00",
+  "environment": {
+    "collected_at": "2026-09-21T01:04:06+00:00",
+    "cpu_count": 4,
+    "cpu_model": "Intel(R) Xeon(R) Processor",
     "machine": "x86_64",
-    "processor": "x86_64"
+    "memory_bytes": 16791945216,
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "processor": "x86_64",
+    "python": "3.12.3"
   },
-  "fixture": "tests/fixtures/sample_bulk.xml",
-  "input_bytes": 6592000,
-  "requested_docs": 2000,
-  "extract_only": {
-    "documents": 2000,
-    "elapsed_s": 1.2147,
-    "docs_per_s": 1646.46,
-    "input_MB_per_s": 5.427
+  "fixture_quality_sample": {
+    "alias_consistency_rate": 1.0,
+    "boilerplate_leak_rate": 0.0,
+    "cpc_labels_per_record": {
+      "max": 2,
+      "mean": 1.5,
+      "min": 1,
+      "n": 400,
+      "p50": 1.5,
+      "p95": 2
+    },
+    "document_types": {
+      "grant": 400
+    },
+    "duplicate_record_keys": 0,
+    "fill_rates": {
+      "abstract_text": 1.0,
+      "application_number": 1.0,
+      "claims_text": 1.0,
+      "description_text": 1.0,
+      "document_type": 1.0,
+      "invention_title": 1.0,
+      "main_cpc_label": 1.0,
+      "patent_grant_id": 1.0,
+      "publication_date": 1.0,
+      "source_file": 1.0
+    },
+    "iso_publication_date_rate": 1.0,
+    "missing_title_abstract_or_claims_rate": 0.0,
+    "records": 400,
+    "text_chars": {
+      "abstract_text": {
+        "max": 79,
+        "mean": 76.0,
+        "min": 73,
+        "n": 400,
+        "p50": 76.0,
+        "p95": 79
+      },
+      "claims_text": {
+        "max": 176,
+        "mean": 121.0,
+        "min": 66,
+        "n": 400,
+        "p50": 121.0,
+        "p95": 176
+      },
+      "description_text": {
+        "max": 151,
+        "mean": 113.5,
+        "min": 76,
+        "n": 400,
+        "p50": 113.5,
+        "p95": 151
+      }
+    },
+    "unique_record_keys": 400
   },
-  "e2e_sqlite_and_jsonl": {
-    "documents_seen": 2000,
-    "documents_parsed": 2000,
+  "input": {
+    "mixed": {
+      "bytes": 6597760,
+      "duplicate_identities": 160,
+      "patent_documents": 2000,
+      "truncated_documents": 5,
+      "unique_identities": 1840,
+      "unknown_documents": 25
+    },
+    "unique": {
+      "bytes": 6592000,
+      "duplicate_identities": 0,
+      "patent_documents": 2000,
+      "truncated_documents": 0,
+      "unique_identities": 2000,
+      "unknown_documents": 0
+    }
+  },
+  "mixed_pass": {
+    "configured_duplicate_fraction": 0.08,
+    "configured_truncated_documents": 5,
+    "configured_unknown_documents": 25,
+    "docs_per_second": 1443.6157458056541,
+    "documents_failed": 25,
+    "documents_parsed": 2005,
+    "documents_seen": 2030,
+    "parse_failure_rate": 0.012315270935960592,
+    "records_skipped": 164,
+    "records_written": 1841,
+    "seconds": 1.3888737400000082,
+    "write_skip_rate": 0.08179551122194513
+  },
+  "output_bytes": {
+    "unique_jsonl": 3895000,
+    "unique_sqlite": 2248704
+  },
+  "replay_pass": {
     "documents_failed": 0,
-    "records_written": 2000,
-    "records_skipped": 0,
-    "elapsed_s": 1.318,
-    "docs_per_s": 1517.46,
-    "input_MB_per_s": 5.002,
-    "db_MB": 2.236,
-    "jsonl_MB": 3.865,
-    "batch_size": 200
+    "documents_parsed": 2000,
+    "documents_seen": 2000,
+    "expected_all_skipped": true,
+    "records_skipped": 2000,
+    "records_written": 0,
+    "seconds": 1.283295781999982
   },
-  "notes": [
-    "Synthetic documents reuse fixture XML with unique grant/application identifiers so SQLite dedup does not collapse the workload.",
-    "Throughput is CPU-bound XML parse + clean + write; network download of USPTO archives is excluded.",
-    "Absolute docs/s depends on document size; fixture documents are small relative to full utility patents."
-  ]
+  "unique_pass": {
+    "docs_per_second": 1465.3357318212784,
+    "documents_failed": 0,
+    "documents_parsed": 2000,
+    "documents_seen": 2000,
+    "peak_rss_bytes": 396128256,
+    "records_per_second": 1465.3357318212784,
+    "records_skipped": 0,
+    "records_written": 2000,
+    "rss_delta_bytes": 0,
+    "seconds": 1.3648749269999598
+  }
 }

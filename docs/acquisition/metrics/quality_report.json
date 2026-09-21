@@ -1,0 +1,323 @@
+{
+  "collected_at": "2026-09-21T01:04:06+00:00",
+  "dedup_and_errors": {
+    "canonical_sha256": "42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944",
+    "created_at": "2026-08-28T03:13:23+00:00",
+    "duplicate_rate_of_valid_json": 0.08779974948378337,
+    "duplicates_skipped": 570714,
+    "identity_check_seen_minus_duplicates_equals_written": true,
+    "invalid_json_by_reason": {
+      "Expecting ',' delimiter": 2,
+      "Expecting value": 174,
+      "Extra data": 9,
+      "Invalid UTF-8: invalid start byte": 1
+    },
+    "invalid_json_rate_of_attempted_rows": 2.8613782243578975e-05,
+    "invalid_json_rows": 186,
+    "jsonl_rows_attempted": 6500364,
+    "records_by_split": {
+      "test": 481311,
+      "train": 4676062,
+      "validation": 772091
+    },
+    "records_seen": 6500178,
+    "records_written": 5929464,
+    "shards_by_split": {
+      "test": 4,
+      "train": 34,
+      "validation": 6
+    },
+    "source_bytes": 873811406212,
+    "source_file": "patents.jsonl",
+    "unique_yield_of_valid_json": 0.9122002505162167
+  },
+  "local_fixture_sample": {
+    "alias_consistency_rate": 1.0,
+    "boilerplate_leak_rate": 0.0,
+    "cpc_labels_per_record": {
+      "max": 2,
+      "mean": 1.5,
+      "min": 1,
+      "n": 400,
+      "p50": 1.5,
+      "p95": 2
+    },
+    "document_types": {
+      "grant": 400
+    },
+    "duplicate_record_keys": 0,
+    "fill_rates": {
+      "abstract_text": 1.0,
+      "application_number": 1.0,
+      "claims_text": 1.0,
+      "description_text": 1.0,
+      "document_type": 1.0,
+      "invention_title": 1.0,
+      "main_cpc_label": 1.0,
+      "patent_grant_id": 1.0,
+      "publication_date": 1.0,
+      "source_file": 1.0
+    },
+    "iso_publication_date_rate": 1.0,
+    "missing_title_abstract_or_claims_rate": 0.0,
+    "records": 400,
+    "text_chars": {
+      "abstract_text": {
+        "max": 79,
+        "mean": 76.0,
+        "min": 73,
+        "n": 400,
+        "p50": 76.0,
+        "p95": 79
+      },
+      "claims_text": {
+        "max": 176,
+        "mean": 121.0,
+        "min": 66,
+        "n": 400,
+        "p50": 121.0,
+        "p95": 176
+      },
+      "description_text": {
+        "max": 151,
+        "mean": 113.5,
+        "min": 76,
+        "n": 400,
+        "p50": 113.5,
+        "p95": 151
+      }
+    },
+    "unique_record_keys": 400
+  },
+  "published_snapshot": {
+    "fill_rates": {
+      "abstract": {
+        "fill_rate": 0.9466904597110295,
+        "nulls": 316097,
+        "rows_with_statistics": 5929464
+      },
+      "abstract_text": {
+        "fill_rate": 0.9466904597110295,
+        "nulls": 316097,
+        "rows_with_statistics": 5929464
+      },
+      "application_number": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "application_type": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "assignee_names.list.element": {
+        "fill_rate": 0.37672140348604866,
+        "nulls": 3695708,
+        "rows_with_statistics": 5929464
+      },
+      "background": {
+        "fill_rate": 0.5380820256265997,
+        "nulls": 2738926,
+        "rows_with_statistics": 5929464
+      },
+      "cited_patent_ids.list.element": {
+        "fill_rate": 0.2969259953344855,
+        "nulls": 4168852,
+        "rows_with_statistics": 5929464
+      },
+      "cited_patents.list.element": {
+        "fill_rate": 0.2969259953344855,
+        "nulls": 4168852,
+        "rows_with_statistics": 5929464
+      },
+      "claim_count": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "claims": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "claims_text": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "country": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "cpc_labels.list.element": {
+        "fill_rate": 0.9461199191023,
+        "nulls": 319480,
+        "rows_with_statistics": 5929464
+      },
+      "date_produced": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "date_published": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "description_text": {
+        "fill_rate": 0.9911130247185918,
+        "nulls": 52695,
+        "rows_with_statistics": 5929464
+      },
+      "document_type": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "examiner_name_first": {
+        "fill_rate": 0.2985925877954567,
+        "nulls": 4158970,
+        "rows_with_statistics": 5929464
+      },
+      "examiner_name_last": {
+        "fill_rate": 0.2985976472746946,
+        "nulls": 4158940,
+        "rows_with_statistics": 5929464
+      },
+      "filing_date": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "full_description": {
+        "fill_rate": 0.9911130247185918,
+        "nulls": 52695,
+        "rows_with_statistics": 5929464
+      },
+      "further_cpc_codes.list.element": {
+        "fill_rate": 0.5507256642421643,
+        "nulls": 2663956,
+        "rows_with_statistics": 5929464
+      },
+      "invention_title": {
+        "fill_rate": 0.9988988886685205,
+        "nulls": 6529,
+        "rows_with_statistics": 5929464
+      },
+      "inventor_list.list.element.inventor_city": {
+        "fill_rate": 0.6024981347386542,
+        "nulls": 2356973,
+        "rows_with_statistics": 5929464
+      },
+      "inventor_list.list.element.inventor_country": {
+        "fill_rate": 0.6028071002707833,
+        "nulls": 2355141,
+        "rows_with_statistics": 5929464
+      },
+      "inventor_list.list.element.inventor_name_first": {
+        "fill_rate": 0.6027919218330695,
+        "nulls": 2355231,
+        "rows_with_statistics": 5929464
+      },
+      "inventor_list.list.element.inventor_name_last": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "inventor_list.list.element.inventor_state": {
+        "fill_rate": -0.4042424408007199,
+        "nulls": 8326405,
+        "rows_with_statistics": 5929464
+      },
+      "ipc_codes.list.element": {
+        "fill_rate": 0.5755523602133346,
+        "nulls": 2516747,
+        "rows_with_statistics": 5929464
+      },
+      "ipcr_labels.list.element": {
+        "fill_rate": 0.5755523602133346,
+        "nulls": 2516747,
+        "rows_with_statistics": 5929464
+      },
+      "kind_code": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "language": {
+        "fill_rate": 0.6028996887408373,
+        "nulls": 2354592,
+        "rows_with_statistics": 5929464
+      },
+      "main_cpc_label": {
+        "fill_rate": 0.9461199191023,
+        "nulls": 319480,
+        "rows_with_statistics": 5929464
+      },
+      "main_ipcr_label": {
+        "fill_rate": 0.5755523602133346,
+        "nulls": 2516747,
+        "rows_with_statistics": 5929464
+      },
+      "npl_citations.list.element": {
+        "fill_rate": 0.20163019794031978,
+        "nulls": 4733905,
+        "rows_with_statistics": 5929464
+      },
+      "patent_grant_id": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "patent_issue_date": {
+        "fill_rate": 0.49844302958918374,
+        "nulls": 2973964,
+        "rows_with_statistics": 5929464
+      },
+      "patent_number": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "primary_cpc_codes.list.element": {
+        "fill_rate": 0.9461199191023,
+        "nulls": 319480,
+        "rows_with_statistics": 5929464
+      },
+      "publication_date": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "publication_number": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "related_application_numbers.list.element": {
+        "fill_rate": 0.4123612184845038,
+        "nulls": 3484383,
+        "rows_with_statistics": 5929464
+      },
+      "source_file": {
+        "fill_rate": 1.0,
+        "nulls": 0,
+        "rows_with_statistics": 5929464
+      },
+      "summary": {
+        "fill_rate": 0.42882459527539085,
+        "nulls": 3386764,
+        "rows_with_statistics": 5929464
+      },
+      "title": {
+        "fill_rate": 0.9988988886685205,
+        "nulls": 6529,
+        "rows_with_statistics": 5929464
+      }
+    },
+    "method": "Parquet footer statistics over every published shard (no row-group payload download).",
+    "rows_measured": 5929464
+  }
+}

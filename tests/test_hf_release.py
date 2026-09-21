@@ -8,10 +8,12 @@ from pathlib import Path
 import pytest
 
 from patentpulse.hf_release import (
+    ReleaseError,
     ReleaseReadinessError,
     ReleaseValidationError,
     assert_manifest_complete,
     build_release,
+    dataset_card_data_files,
     normalize_record,
     release_record_key,
     validate_release,
@@ -143,3 +145,39 @@ def test_export_can_record_invalid_utf8_when_explicitly_enabled(tmp_path: Path):
     summary = build_release(input_path, tmp_path / "repaired", skip_invalid_json=True)
     assert summary.records_written == 1
     assert summary.invalid_json_rows == [{"line": 2, "error": "Invalid UTF-8: invalid start byte"}]
+
+
+def test_dataset_card_omits_empty_unspecified_split():
+    yaml = dataset_card_data_files({"train": 10, "validation": 2, "test": 1})
+    assert "path: data/train/*.parquet" in yaml
+    assert "path: data/unspecified/*.parquet" not in yaml
+
+
+def test_dataset_card_includes_unspecified_only_when_populated():
+    yaml = dataset_card_data_files({"unspecified": 4})
+    assert "path: data/unspecified/*.parquet" in yaml
+
+
+def test_dataset_card_rejects_empty_release():
+    with pytest.raises(ReleaseError, match="no split contains records"):
+        dataset_card_data_files({})
+
+
+def test_built_readme_does_not_advertise_missing_unspecified_glob(tmp_path: Path):
+    input_path = tmp_path / "patents.jsonl"
+    input_path.write_text(
+        json.dumps(
+            {
+                "patent_grant_id": "10000000",
+                "publication_date": "2024-06-01",
+                "document_type": "grant",
+            }
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    summary = build_release(input_path, tmp_path / "release", max_shard_bytes=1_000_000, row_group_bytes=100)
+    readme = (tmp_path / "release" / "README.md").read_text(encoding="utf-8")
+    assert "path: data/train/*.parquet" in readme
+    assert "path: data/unspecified/*.parquet" not in readme
+    assert summary.records_by_split == {"train": 1}

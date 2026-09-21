@@ -1,86 +1,72 @@
 # Quality metrics
 
-Hard quality measurements for the published Hugging Face snapshot
-`theworker02/patentpulse` (release `2026-08-28`, canonical digest
-`42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944`).
+All published-snapshot fill rates below come from Parquet footer statistics on **every** shard (`44/44` succeeded, `0` footer errors, `5,929,464` rows). No row-group payloads were downloaded. Recompute with `python -m patentpulse.metrics`.
 
-Reproduce:
+Local extraction quality was measured on 400 unique records expanded from `tests/fixtures/sample_bulk.xml`.
 
-```bash
-python scripts/compute_acquisition_metrics.py \
-  --output docs/acquisition/metrics/acquisition_metrics.json
-```
+## Published snapshot fill rates
 
-## Split integrity
+| Field | Fill rate | Nulls / 5,929,464 |
+| --- | ---: | ---: |
+| `patent_grant_id` | 100.000% | 0 |
+| `application_number` | 100.000% | 0 |
+| `publication_date` | 100.000% | 0 |
+| `claims_text` | 100.000% | 0 |
+| `document_type` | 100.000% | 0 |
+| `source_file` | 100.000% | 0 |
+| `invention_title` / `title` | 99.890% | 6,529 |
+| `description_text` / `full_description` | 99.111% | 52,695 |
+| `abstract_text` / `abstract` | 94.669% | 316,097 |
+| `main_cpc_label` / `primary_cpc_codes` | 94.612% | 319,480 |
+| `kind_code`, `country`, `language`, `filing_date`, `date_produced`, `application_type`, `claim_count` | 60.290% | 2,354,592 |
+| `inventor_list.inventor_name_last` | 60.290% | 2,354,592 |
+| `ipc_codes` | 57.555% | 2,516,747 |
+| `further_cpc_codes` | 55.073% | 2,663,956 |
+| `background` | 53.808% | 2,738,926 |
+| `patent_issue_date` | 49.844% | 2,973,964 |
+| `summary` | 42.882% | 3,386,764 |
+| `assignee_names` | 37.672% | 3,695,708 |
+| `examiner_name_last` | 29.860% | 4,158,940 |
+| `cited_patent_ids` | 29.693% | 4,168,852 |
 
-| Split | Records | Parquet shards |
-| --- | --- | --- |
-| train | 4,676,062 | 34 |
-| validation | 772,091 | 6 |
-| test | 481,311 | 4 |
-| **Total unique** | **5,929,464** | **44** |
+`patent_issue_date` is defined only for grants, so a ~50% fill rate is consistent with a mixed grant/application corpus, not with a broken column.
 
-Temporal policy (documented in the dataset card): train before 2025-01-01;
-validation = 2025; test = 2026.
+The 60.29% cluster (`kind_code`, `filing_date`, inventor names, `claim_count`, and several bibliographic extras) is a **schema-evolution gap**, not random missingness: those columns were added after part of the append-only JSONL had already been written. A buyer who re-extracts from weekly XML with the current parser fills them on new ingests. Rebuilding historical weeks is optional.
 
-## Field fill rates (sampled)
+Empty-list nested columns (`further_cpc_codes`, citations) use Parquet null counts on list elements. Treat those as "no values stored," not as XML proof that the USPTO omitted the field.
 
-Sample: **18,168 rows** across row groups from `train/part-00000` and
-`validation/part-00000` (not a full census). Document-type mix in sample:
-12,003 grants · 6,165 applications.
+## Alias and cleaning contract (fixture sample, n=400)
 
-| Field | Nonempty |
-| --- | --- |
-| `patent_grant_id` | 100% |
-| `application_number` | 100% |
-| `publication_date` | 100% |
-| `document_type` | 100% |
-| `source_file` | 100% |
-| `claims_text` | **100%** |
-| `invention_title` | **99.82%** |
-| `description_text` | **99.28%** |
-| `abstract_text` | **90.94%** |
-| `main_cpc_label` / `primary_cpc_codes` / `cpc_labels` | **90.84%** |
-| `kind_code` | 0% in published sample |
-| `filing_date` | 0% in published sample |
-| `further_cpc_codes`, `ipc_codes` | 0% in published sample |
-| `assignee_names`, `inventor_list` | 0% in published sample |
-| `cited_patent_ids`, `npl_citations` | 0% in published sample |
+| Check | Rate |
+| --- | ---: |
+| HUPD aliases match canonical text fields | 100% |
+| Publication dates are ISO `YYYY-MM-DD` | 100% |
+| Title, abstract, and claims present | 100% |
+| `CROSS-REFERENCE` boilerplate leaked into description | 0% |
+| Duplicate record keys | 0 |
 
-### Interpretation
+Current-parser records also populate `kind_code`, `filing_date`, inventors, assignees, examiner names, and citations when the XML contains them. That is why the fixture sample is 100% on core bibliographic extras while the published snapshot is not.
 
-- Core ML text fields (title, abstract, claims, description) and primary CPC
-  are strong in the published snapshot.
-- Abstract/CPC gaps are expected for some design/plant and sparse weekly rows.
-- **Bibliographic enrichment fields are empty in the v1 Hub snapshot** despite
-  being implemented in the current pipeline (`tests/test_pipeline.py` asserts
-  inventors, assignees, citations, filing date, kind code on the fixture).
-  Diligence conclusion: treat v1 as a **full-text + primary CPC** corpus;
-  plan a **re-ingest/re-export** for inventor/assignee/citation completeness.
+## Column storage concentration
 
-## Text length distributions (sampled nonempty values)
+Decoded Parquet pages (uncompressed) are dominated by description text. Aliases duplicate the same bytes:
 
-| Field | Mean chars | p50 | p90 | p99 | Max |
-| --- | --- | --- | --- | --- | --- |
-| `invention_title` | 55 | 52 | 97 | 154 | 336 |
-| `abstract_text` | 714 | 743 | 962 | 1,260 | 3,763 |
-| `claims_text` | 6,382 | 5,872 | 11,207 | 20,533 | 140,619 |
-| `description_text` | 63,286 | 47,320 | 125,872 | 326,065 | 1,969,457 |
+| Column | Uncompressed pages | Compressed pages |
+| --- | ---: | ---: |
+| `description_text` | 402.79 GB | 89.20 GB |
+| `full_description` (alias) | 402.79 GB | 89.20 GB |
+| `summary` | 51.24 GB | 10.37 GB |
+| `claims_text` / `claims` | 39.51 GB each | 6.22 GB each |
+| `background` | 19.69 GB | 5.12 GB |
+| `abstract_text` / `abstract` | 3.99 GB each | 1.17 GB each |
 
-## Pipeline contract tests
+A buyer that drops alias columns at ingest saves roughly half of description and claims storage without losing information.
 
-```bash
-python -m pytest tests -q
-```
+## Known quality issues to budget for
 
-As of this data-room build: **11 passed**. Tests cover concatenated XML
-splitting, cleaning, bibliographic/CPC extraction, SQLite/JSONL writers, and
-HF release validation helpers.
+1. **Hub viewer** cannot infer a shared format because the published card still lists an empty `unspecified` split. Fixed in this pipeline; the live Hub card still needs the patch in [HUB_VIEWER_FIX.md](HUB_VIEWER_FIX.md).
+2. **Historical JSONL** lacked later bibliographic columns. Re-extract those weeks if examiner, inventor, or filing-date coverage is a product requirement.
+3. **Design and plant patents** are expected to have sparse abstracts, claims, or CPC labels. The 5.3% abstract-null and 5.4% CPC-null rates are not all parser failures.
+4. **No patent-family collapse.** Grants and applications that refer to the same invention remain separate rows, by design.
 
-## Recommended buyer acceptance checks
-
-1. Confirm `release_manifest.json` digest matches
-   `42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944`.
-2. Spot-check ≥1,000 streamed rows for nonempty claims + description.
-3. After any fresh ingest, assert inventor/assignee/citation fill rates on a
-   recent grant week before cutting a v2 release.
+Raw JSON: [metrics/quality_report.json](metrics/quality_report.json), [metrics/parquet_inventory.json](metrics/parquet_inventory.json).

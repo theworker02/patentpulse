@@ -1,53 +1,82 @@
 # Ingestion throughput benchmark
 
-Reproducible CPU-bound parse benchmark (no USPTO network). Measured on the
-cloud-agent host used to build this data room.
+Measured 2026-09-21 on the machine recorded in [metrics/environment.json](metrics/environment.json).
 
-## How to reproduce
+## Hardware
+
+| Item | Value |
+| --- | --- |
+| CPU | Intel Xeon, 4 logical processors |
+| Memory | 16.79 GB |
+| OS | Linux 6.12.94+ x86_64, glibc 2.39 |
+| Python | 3.12.3 |
+| Output | SQLite WAL + JSONL, batch size 250 |
+
+This is a cloud-agent VM, not a tuned ingest box. Treat the numbers as a lower bound a buyer can reproduce, not as a peak-cluster claim.
+
+## Reproducing the run
 
 ```bash
-python scripts/benchmark_ingestion.py \
-  --docs 2000 \
-  --batch-size 200 \
-  --output docs/acquisition/metrics/ingestion_benchmark.json
+python -m patentpulse.metrics --output docs/acquisition/metrics --documents 2000
 ```
 
-The script expands `tests/fixtures/sample_bulk.xml` into N documents with
-**unique** grant/application IDs so SQLite identity dedup does not collapse
-the workload.
+The command expands `tests/fixtures/sample_bulk.xml` into unique USPTO-like documents, parses them with the production `parse_bulk_file` path, then replays the unique file into the same SQLite database.
 
-## Results (2026-09-21)
+## Unique-file pass (2,000 distinct identities)
 
-| Host | `Linux-6.12.94+ x86_64`, Python 3.12.3 |
-| --- | --- |
-| Input | 2,000 docs · 6.592 MB synthetic bulk |
+| Metric | Value |
+| --- | ---: |
+| Documents seen | 2,000 |
+| Documents parsed | 2,000 |
+| Documents failed | 0 |
+| Records written | 2,000 |
+| Records skipped | 0 |
+| Wall time | 1.365 s |
+| Throughput | **1,465.3 docs/s** |
+| Unique JSONL bytes | 3,895,000 |
+| Unique SQLite bytes | 2,248,704 |
 
-| Stage | Docs/s | Input MB/s | Notes |
-| --- | --- | --- | --- |
-| Extract only (stream + `extract_patent_from_xml`) | **1,646.5** | 5.43 | No DB/JSONL writes |
-| End-to-end SQLite + JSONL | **1,517.5** | 5.00 | `documents_failed=0`, `records_skipped=0` |
+## Mixed-file pass (production-like error mix)
 
-Artifact: [metrics/ingestion_benchmark.json](metrics/ingestion_benchmark.json).
+Configured: 2,000 patent docs, 8% duplicate identities (160), 25 unknown-root sequence listings, 5 truncated XML documents.
 
-## Scaling notes for buyers
+| Metric | Value |
+| --- | ---: |
+| Documents seen | 2,030 |
+| Documents parsed | 2,005 |
+| Documents failed | 25 |
+| Parse failure rate | 1.23% of seen documents |
+| Records written | 1,841 |
+| Records skipped | 164 |
+| Write skip rate | 8.18% |
+| Throughput | 1,443.6 parsed docs/s |
 
-1. Fixture documents are **small** relative to full utility patents (typical
-   description p50 ≈ 47k characters in the Hub sample). Expect lower docs/s
-   on production weekly ZIPs; throughput in **MB/s of XML** is the stabler
-   planner metric.
-2. Network download from USPTO ODP and ZIP decompression add wall time outside
-   this benchmark.
-3. Weekly grant/application files contain on the order of thousands of
-   documents; at ~10³ docs/s parse, a single week is typically minutes of CPU
-   after download on a modern x86_64 box.
-4. Order-of-magnitude full backfill: with continuous sync, wall clock is
-   dominated by download quotas, disk, and operator uptime — not by the XML
-   parser once hardware is provisioned.
+Failed documents equal the 25 unknown-root stubs. Truncated XML was recovered by `lxml` `recover=True` rather than aborting the file, which is the production `skip_errors` behavior.
 
-## Suggested buyer benchmark add-ons
+## Replay pass (cross-run SQLite dedup)
 
-- Time one real `ipg*.zip` / `ipa*.zip` through
-  `python -m patentpulse.parse --format both`.
-- Record `docs_per_s` and `input_MB_per_s` in your diligence worksheet.
-- Re-run `scripts/benchmark_ingestion.py` on the target deploy SKU for an
-  apples-to-apples comparison with this data room.
+The unique file was parsed a second time into the same `patents.db`.
+
+| Metric | Value |
+| --- | ---: |
+| Documents parsed | 2,000 |
+| Records written | 0 |
+| Records skipped | 2,000 |
+| All skipped | true |
+
+Identity is `(document_type, patent_grant_id, application_number, publication_date)` hashed as `record_key`. Interrupted backfills can be restarted without duplicating SQLite rows. JSONL is append-only per process; global JSONL dedup happens at Parquet export.
+
+## Scaling note (do not ignore)
+
+Fixture records are short. Unique JSONL averaged **1,947.5 bytes/row**. The published snapshot averages **147,368 bytes/row** of JSONL, about **76×** more text.
+
+If parse time scales with text volume on this hardware, a single-process estimate for production documents is on the order of **~19 docs/s**, or roughly **3.6 days** of CPU time to re-parse 5.93 million full-text records, plus download and I/O. Weekly incremental ingest of ~6,000–10,000 new documents would then be **minutes**, not months.
+
+These two numbers answer different questions:
+
+- **1,465 docs/s** is the measured, reproducible parser overhead on small documents.
+- **~19 docs/s** is a size-adjusted planning figure for full-text USPTO records on this 4-vCPU box.
+
+A buyer with more cores can shard by weekly ZIP. The parser is constant-memory per document.
+
+Raw JSON: [metrics/ingestion_benchmark.json](metrics/ingestion_benchmark.json).
