@@ -1,0 +1,28 @@
+{
+  "collected_at": "2026-09-21T01:04:02+00:00",
+  "dataset": "theworker02/patentpulse",
+  "hub_repo_file_bytes": 211407155512,
+  "jsonl_bytes_per_unique_record": 147367.68891960554,
+  "jsonl_input_bytes": 873811406212,
+  "jsonl_input_gb": 873.811406212,
+  "jsonl_input_gib": 813.8002885617316,
+  "jsonl_to_parquet_file_ratio": 0.24193679804942875,
+  "notes": [
+    "JSONL input is the uncompressed append-only ingestion artifact that produced this snapshot.",
+    "Parquet files are Zstandard-compressed shards with dictionary encoding.",
+    "Parquet page uncompressed bytes are the decoded Arrow/Parquet column pages, not the JSONL source."
+  ],
+  "parquet_file_bytes_per_unique_record": 35653.66679315365,
+  "parquet_page_compressed_bytes": 211197521296,
+  "parquet_page_compression_ratio": 0.21767339822254939,
+  "parquet_page_uncompressed_bytes": 970249571241,
+  "published_parquet_file_bytes": 211407133718,
+  "published_parquet_gb": 211.407133718,
+  "published_parquet_gib": 196.8882360663265,
+  "published_sidecar_bytes": 21794,
+  "raw_uspto_archives_claim": {
+    "measured_here": false,
+    "reason": "Completed archives are deleted after ingest; bulkdata.uspto.gov is not required to size the published snapshot.",
+    "statement": "Project documentation describes official weekly USPTO ZIP archives on the order of 1.6 TB before deletion."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    "corpus_inventory.json",
+    "dedup_and_errors.json",
+    "environment.json",
+    "hf_release_manifest.json",
+    "hf_tree.json",
+    "ingestion_benchmark.json",
+    "parquet_inventory.json",
+    "quality_report.json"
+  ],
+  "collected_at": "2026-09-21T01:04:06+00:00",
+  "dataset": "theworker02/patentpulse",
+  "headline": {
+    "duplicate_rate": 0.08779974948378337,
+    "ingest_docs_per_second": 1465.3357318212784,
+    "invalid_json_rows": 186,
+    "jsonl_input_bytes": 873811406212,
+    "parquet_file_bytes": 211407133718,
+    "unique_records": 5929464
+  }
+}

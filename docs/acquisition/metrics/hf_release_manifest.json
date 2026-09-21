@@ -1,0 +1,766 @@
+{
+  "canonical_sha256": "42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944",
+  "created_at": "2026-08-28T03:13:23+00:00",
+  "duplicates_skipped": 570714,
+  "invalid_json_rows": [
+    {
+      "error": "Expecting value",
+      "line": 2636619
+    },
+    {
+      "error": "Expecting value",
+      "line": 2637254
+    },
+    {
+      "error": "Extra data",
+      "line": 2637929
+    },
+    {
+      "error": "Expecting value",
+      "line": 2638682
+    },
+    {
+      "error": "Expecting value",
+      "line": 2643027
+    },
+    {
+      "error": "Expecting value",
+      "line": 2643185
+    },
+    {
+      "error": "Expecting value",
+      "line": 2644483
+    },
+    {
+      "error": "Expecting value",
+      "line": 2644687
+    },
+    {
+      "error": "Expecting value",
+      "line": 2644837
+    },
+    {
+      "error": "Expecting value",
+      "line": 2646239
+    },
+    {
+      "error": "Expecting value",
+      "line": 2646783
+    },
+    {
+      "error": "Expecting value",
+      "line": 2646848
+    },
+    {
+      "error": "Expecting value",
+      "line": 2648195
+    },
+    {
+      "error": "Expecting value",
+      "line": 2648245
+    },
+    {
+      "error": "Expecting value",
+      "line": 2648250
+    },
+    {
+      "error": "Expecting value",
+      "line": 2649621
+    },
+    {
+      "error": "Expecting value",
+      "line": 2649974
+    },
+    {
+      "error": "Expecting value",
+      "line": 2651466
+    },
+    {
+      "error": "Expecting value",
+      "line": 2652243
+    },
+    {
+      "error": "Extra data",
+      "line": 2652292
+    },
+    {
+      "error": "Expecting value",
+      "line": 2652691
+    },
+    {
+      "error": "Expecting value",
+      "line": 2653556
+    },
+    {
+      "error": "Expecting value",
+      "line": 2653860
+    },
+    {
+      "error": "Expecting value",
+      "line": 2654347
+    },
+    {
+      "error": "Expecting value",
+      "line": 5069634
+    },
+    {
+      "error": "Expecting value",
+      "line": 5070575
+    },
+    {
+      "error": "Expecting value",
+      "line": 5071619
+    },
+    {
+      "error": "Expecting value",
+      "line": 5071723
+    },
+    {
+      "error": "Expecting value",
+      "line": 5071981
+    },
+    {
+      "error": "Expecting value",
+      "line": 5073238
+    },
+    {
+      "error": "Expecting value",
+      "line": 5073923
+    },
+    {
+      "error": "Expecting value",
+      "line": 5077031
+    },
+    {
+      "error": "Expecting value",
+      "line": 5077530
+    },
+    {
+      "error": "Extra data",
+      "line": 5077969
+    },
+    {
+      "error": "Expecting value",
+      "line": 5078796
+    },
+    {
+      "error": "Expecting value",
+      "line": 5079062
+    },
+    {
+      "error": "Expecting value",
+      "line": 5079879
+    },
+    {
+      "error": "Expecting value",
+      "line": 5081553
+    },
+    {
+      "error": "Expecting value",
+      "line": 5083558
+    },
+    {
+      "error": "Expecting value",
+      "line": 5087199
+    },
+    {
+      "error": "Expecting value",
+      "line": 5087738
+    },
+    {
+      "error": "Expecting value",
+      "line": 5088787
+    },
+    {
+      "error": "Expecting value",
+      "line": 5089025
+    },
+    {
+      "error": "Extra data",
+      "line": 5089479
+    },
+    {
+      "error": "Expecting value",
+      "line": 5090740
+    },
+    {
+      "error": "Expecting value",
+      "line": 5090756
+    },
+    {
+      "error": "Extra data",
+      "line": 5091751
+    },
+    {
+      "error": "Expecting value",
+      "line": 5092068
+    },
+    {
+      "error": "Expecting value",
+      "line": 5092392
+    },
+    {
+      "error": "Expecting value",
+      "line": 5092829
+    },
+    {
+      "error": "Expecting value",
+      "line": 5093817
+    },
+    {
+      "error": "Expecting value",
+      "line": 5095270
+    },
+    {
+      "error": "Expecting value",
+      "line": 5095448
+    },
+    {
+      "error": "Expecting value",
+      "line": 5095806
+    },
+    {
+      "error": "Expecting value",
+      "line": 5095907
+    },
+    {
+      "error": "Expecting value",
+      "line": 5096164
+    },
+    {
+      "error": "Expecting value",
+      "line": 5096302
+    },
+    {
+      "error": "Expecting value",
+      "line": 5096558
+    },
+    {
+      "error": "Expecting value",
+      "line": 5097013
+    },
+    {
+      "error": "Expecting value",
+      "line": 5097171
+    },
+    {
+      "error": "Expecting value",
+      "line": 5097428
+    },
+    {
+      "error": "Expecting value",
+      "line": 5098231
+    },
+    {
+      "error": "Expecting value",
+      "line": 5099363
+    },
+    {
+      "error": "Expecting value",
+      "line": 5100434
+    },
+    {
+      "error": "Expecting value",
+      "line": 5100864
+    },
+    {
+      "error": "Expecting value",
+      "line": 5101015
+    },
+    {
+      "error": "Expecting value",
+      "line": 5102225
+    },
+    {
+      "error": "Expecting value",
+      "line": 5104426
+    },
+    {
+      "error": "Expecting value",
+      "line": 5104561
+    },
+    {
+      "error": "Expecting value",
+      "line": 5104580
+    },
+    {
+      "error": "Expecting value",
+      "line": 5105178
+    },
+    {
+      "error": "Expecting value",
+      "line": 5105285
+    },
+    {
+      "error": "Expecting value",
+      "line": 5105505
+    },
+    {
+      "error": "Expecting value",
+      "line": 5107757
+    },
+    {
+      "error": "Extra data",
+      "line": 5108198
+    },
+    {
+      "error": "Expecting value",
+      "line": 5110182
+    },
+    {
+      "error": "Invalid UTF-8: invalid start byte",
+      "line": 5110243
+    },
+    {
+      "error": "Expecting value",
+      "line": 5110458
+    },
+    {
+      "error": "Expecting value",
+      "line": 5110939
+    },
+    {
+      "error": "Expecting value",
+      "line": 5111095
+    },
+    {
+      "error": "Expecting value",
+      "line": 5112437
+    },
+    {
+      "error": "Expecting value",
+      "line": 5116112
+    },
+    {
+      "error": "Expecting value",
+      "line": 5117568
+    },
+    {
+      "error": "Expecting value",
+      "line": 5117601
+    },
+    {
+      "error": "Expecting value",
+      "line": 5118418
+    },
+    {
+      "error": "Expecting value",
+      "line": 5118492
+    },
+    {
+      "error": "Expecting value",
+      "line": 5118862
+    },
+    {
+      "error": "Extra data",
+      "line": 5119509
+    },
+    {
+      "error": "Expecting value",
+      "line": 5121509
+    },
+    {
+      "error": "Expecting value",
+      "line": 5121690
+    },
+    {
+      "error": "Expecting value",
+      "line": 5121819
+    },
+    {
+      "error": "Expecting value",
+      "line": 5122521
+    },
+    {
+      "error": "Expecting ',' delimiter",
+      "line": 5123219
+    },
+    {
+      "error": "Expecting value",
+      "line": 5123220
+    },
+    {
+      "error": "Expecting value",
+      "line": 5123905
+    },
+    {
+      "error": "Expecting value",
+      "line": 5124244
+    },
+    {
+      "error": "Expecting value",
+      "line": 5124443
+    },
+    {
+      "error": "Expecting value",
+      "line": 5124671
+    },
+    {
+      "error": "Expecting value",
+      "line": 5125979
+    },
+    {
+      "error": "Expecting value",
+      "line": 5126065
+    },
+    {
+      "error": "Expecting value",
+      "line": 5126638
+    },
+    {
+      "error": "Expecting value",
+      "line": 5127904
+    },
+    {
+      "error": "Expecting value",
+      "line": 5128443
+    },
+    {
+      "error": "Expecting value",
+      "line": 5129159
+    },
+    {
+      "error": "Expecting value",
+      "line": 5129738
+    },
+    {
+      "error": "Expecting value",
+      "line": 5130535
+    },
+    {
+      "error": "Expecting value",
+      "line": 5132534
+    },
+    {
+      "error": "Expecting value",
+      "line": 5133281
+    },
+    {
+      "error": "Expecting value",
+      "line": 5133607
+    },
+    {
+      "error": "Expecting value",
+      "line": 5134739
+    },
+    {
+      "error": "Expecting value",
+      "line": 5134988
+    },
+    {
+      "error": "Expecting value",
+      "line": 5136153
+    },
+    {
+      "error": "Expecting value",
+      "line": 5136699
+    },
+    {
+      "error": "Expecting value",
+      "line": 5137273
+    },
+    {
+      "error": "Extra data",
+      "line": 5137907
+    },
+    {
+      "error": "Expecting value",
+      "line": 5139914
+    },
+    {
+      "error": "Expecting value",
+      "line": 5140778
+    },
+    {
+      "error": "Expecting value",
+      "line": 5141419
+    },
+    {
+      "error": "Expecting value",
+      "line": 5142543
+    },
+    {
+      "error": "Expecting value",
+      "line": 5142734
+    },
+    {
+      "error": "Expecting value",
+      "line": 5143170
+    },
+    {
+      "error": "Expecting value",
+      "line": 5143902
+    },
+    {
+      "error": "Expecting value",
+      "line": 5145924
+    },
+    {
+      "error": "Expecting value",
+      "line": 5147310
+    },
+    {
+      "error": "Expecting value",
+      "line": 5147752
+    },
+    {
+      "error": "Expecting value",
+      "line": 5148457
+    },
+    {
+      "error": "Expecting value",
+      "line": 5149196
+    },
+    {
+      "error": "Expecting value",
+      "line": 5150542
+    },
+    {
+      "error": "Expecting value",
+      "line": 5151244
+    },
+    {
+      "error": "Expecting value",
+      "line": 5151274
+    },
+    {
+      "error": "Expecting value",
+      "line": 5151364
+    },
+    {
+      "error": "Expecting value",
+      "line": 5152526
+    },
+    {
+      "error": "Expecting value",
+      "line": 5156436
+    },
+    {
+      "error": "Expecting value",
+      "line": 5157762
+    },
+    {
+      "error": "Expecting value",
+      "line": 5161026
+    },
+    {
+      "error": "Expecting value",
+      "line": 5161396
+    },
+    {
+      "error": "Expecting value",
+      "line": 5161887
+    },
+    {
+      "error": "Expecting value",
+      "line": 5165997
+    },
+    {
+      "error": "Expecting ',' delimiter",
+      "line": 5167265
+    },
+    {
+      "error": "Expecting value",
+      "line": 5169867
+    },
+    {
+      "error": "Expecting value",
+      "line": 5170195
+    },
+    {
+      "error": "Expecting value",
+      "line": 5172979
+    },
+    {
+      "error": "Expecting value",
+      "line": 5175018
+    },
+    {
+      "error": "Expecting value",
+      "line": 5176362
+    },
+    {
+      "error": "Expecting value",
+      "line": 5177359
+    },
+    {
+      "error": "Expecting value",
+      "line": 5177904
+    },
+    {
+      "error": "Expecting value",
+      "line": 5178048
+    },
+    {
+      "error": "Expecting value",
+      "line": 5179380
+    },
+    {
+      "error": "Expecting value",
+      "line": 5179753
+    },
+    {
+      "error": "Expecting value",
+      "line": 5179954
+    },
+    {
+      "error": "Expecting value",
+      "line": 5180916
+    },
+    {
+      "error": "Expecting value",
+      "line": 5181147
+    },
+    {
+      "error": "Expecting value",
+      "line": 5182811
+    },
+    {
+      "error": "Expecting value",
+      "line": 5183785
+    },
+    {
+      "error": "Expecting value",
+      "line": 5184645
+    },
+    {
+      "error": "Expecting value",
+      "line": 5184880
+    },
+    {
+      "error": "Expecting value",
+      "line": 5184960
+    },
+    {
+      "error": "Expecting value",
+      "line": 5185995
+    },
+    {
+      "error": "Expecting value",
+      "line": 5186060
+    },
+    {
+      "error": "Expecting value",
+      "line": 5186674
+    },
+    {
+      "error": "Expecting value",
+      "line": 5186741
+    },
+    {
+      "error": "Expecting value",
+      "line": 5187531
+    },
+    {
+      "error": "Expecting value",
+      "line": 5188071
+    },
+    {
+      "error": "Expecting value",
+      "line": 5188082
+    },
+    {
+      "error": "Expecting value",
+      "line": 5188469
+    },
+    {
+      "error": "Expecting value",
+      "line": 5188581
+    },
+    {
+      "error": "Expecting value",
+      "line": 5191854
+    },
+    {
+      "error": "Expecting value",
+      "line": 5192642
+    },
+    {
+      "error": "Expecting value",
+      "line": 5192978
+    },
+    {
+      "error": "Expecting value",
+      "line": 5193228
+    },
+    {
+      "error": "Expecting value",
+      "line": 5193684
+    },
+    {
+      "error": "Expecting value",
+      "line": 5193742
+    },
+    {
+      "error": "Expecting value",
+      "line": 5194558
+    },
+    {
+      "error": "Expecting value",
+      "line": 5194728
+    },
+    {
+      "error": "Expecting value",
+      "line": 5196937
+    },
+    {
+      "error": "Expecting value",
+      "line": 5196979
+    },
+    {
+      "error": "Expecting value",
+      "line": 5197390
+    },
+    {
+      "error": "Expecting value",
+      "line": 5197470
+    },
+    {
+      "error": "Expecting value",
+      "line": 5198880
+    },
+    {
+      "error": "Expecting value",
+      "line": 5200546
+    },
+    {
+      "error": "Expecting value",
+      "line": 5201659
+    },
+    {
+      "error": "Expecting value",
+      "line": 5203128
+    },
+    {
+      "error": "Expecting value",
+      "line": 5203455
+    },
+    {
+      "error": "Expecting value",
+      "line": 5203748
+    },
+    {
+      "error": "Expecting value",
+      "line": 5204132
+    },
+    {
+      "error": "Extra data",
+      "line": 5204717
+    }
+  ],
+  "max_shard_bytes": 5000000000,
+  "records_by_split": {
+    "test": 481311,
+    "train": 4676062,
+    "validation": 772091
+  },
+  "records_seen": 6500178,
+  "records_written": 5929464,
+  "shards_by_split": {
+    "test": 4,
+    "train": 34,
+    "validation": 6
+  },
+  "source_bytes": 873811406212,
+  "source_file": "patents.jsonl"
+}

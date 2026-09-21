@@ -1,0 +1,10 @@
+{
+  "collected_at": "2026-09-21T01:03:56+00:00",
+  "cpu_count": 4,
+  "cpu_model": "Intel(R) Xeon(R) Processor",
+  "machine": "x86_64",
+  "memory_bytes": 16791945216,
+  "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+  "processor": "x86_64",
+  "python": "3.12.3"
+}

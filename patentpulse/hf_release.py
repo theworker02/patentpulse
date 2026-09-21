@@ -390,8 +390,26 @@ def _check_output_space(source_path: Path, output_dir: Path, *, max_records: int
         )
 
 
+def dataset_card_data_files(records_by_split: Mapping[str, int]) -> str:
+    """Emit Hugging Face ``data_files`` entries only for splits that have rows.
+
+    An empty ``unspecified`` glob makes the Hub dataset viewer fail to infer a
+    shared file format across splits. Buyers and the public snapshot both need
+    the card to mention only shards that exist.
+    """
+    lines = ["  data_files:"]
+    for split in ("train", "validation", "test", "unspecified"):
+        if records_by_split.get(split, 0) > 0:
+            lines.append(f"  - split: {split}")
+            lines.append(f"    path: data/{split}/*.parquet")
+    if len(lines) == 1:
+        raise ReleaseError("Release card cannot be written because no split contains records.")
+    return "\n".join(lines)
+
+
 def _dataset_card(summary: ReleaseSummary) -> str:
     counts = summary.records_by_split
+    data_files = dataset_card_data_files(counts)
     return f'''---
 language:
 - en
@@ -406,15 +424,7 @@ task_categories:
 - summarization
 configs:
 - config_name: default
-  data_files:
-  - split: train
-    path: data/train/*.parquet
-  - split: validation
-    path: data/validation/*.parquet
-  - split: test
-    path: data/test/*.parquet
-  - split: unspecified
-    path: data/unspecified/*.parquet
+{data_files}
 ---
 
 # PatentPulse

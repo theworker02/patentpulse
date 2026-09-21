@@ -1,70 +1,38 @@
-# Executive summary — PatentPulse for acquirers
+# Executive summary
 
-PatentPulse is a **production USPTO full-text ingestion system** plus a
-**5.93M-record immutable Parquet snapshot** covering grants and published
-applications (2018–2026 backfill window). It turns weekly official XML dumps
-into search-, RAG-, and training-ready text with per-archive provenance.
+PatentPulse is a production USPTO full-text pipeline plus an immutable 5.93 million-record Parquet snapshot. An acquirer does not buy a scraper. They buy a finished weekly ingest loop, a normalized schema with HUPD-compatible aliases, global identity deduplication, and a citable Hub package.
 
-## Why acquire instead of rebuild
+## Headline metrics (measured 2026-09-21)
 
-An in-house team rebuilding this typically spends months on:
+| Metric | Value | Source |
+| --- | --- | --- |
+| Unique released records | **5,929,464** | `release_manifest.json` |
+| Valid JSONL rows seen | 6,500,178 | same |
+| Duplicates removed | 570,714 (**8.78%**) | same; `seen - duplicates = written` |
+| Malformed JSONL rows skipped | 186 (**0.00286%** of attempted rows) | same |
+| Unique yield of valid JSON | **91.22%** | 5,929,464 / 6,500,178 |
+| Uncompressed JSONL input | **873.81 GB** (813.80 GiB) | `source_bytes` |
+| Published Zstd Parquet | **211.41 GB** (196.89 GiB, 44 files) | Hub tree |
+| Decoded Parquet page bytes | **970.25 GB** | footers of all 44 shards |
+| Parquet page compression | **21.77%** of decoded pages | compressed / uncompressed pages |
+| JSONL → Parquet file ratio | **24.19%** remaining | 211.41 / 873.81 |
+| Core ID fill rate | **100%** grant id, application number, publication date, claims, document type, source file | Parquet statistics, 5.93M rows |
+| Title / description / abstract | 99.89% / 99.11% / 94.67% | same |
+| Primary CPC | 94.61% | same |
+| Local ingest throughput | **1,465 docs/s** (2,000 unique fixture documents, SQLite+JSONL, 4 vCPU) | `ingestion_benchmark.json` |
+| Replay dedup | **2,000/2,000 skipped**, 0 new writes | second pass on the same SQLite file |
 
-| Workstream | What PatentPulse already ships |
-| --- | --- |
-| ODP catalog + weekly sync | Resumable sync with rate-limit retries, size checks, process lock |
-| Concatenated XML streaming | Constant-memory document splitter for multi-GB weekly ZIPs |
-| Field normalization | Title, abstract, claims, description, CPC/IPC, citations, inventors |
-| Crash-safe writers | SQLite WAL + append JSONL with stable identity dedup |
-| Publish path | Guarded Zstd Parquet exporter, temporal splits, content digest |
-| Provenance | Per-file URL, SHA-256, parse/fail counts in the ingest manifest |
+## Why this is an acquisition, not a weekend project
 
-**Buyer value proposition:** skip the data-engineering runway and plug a
-validated corpus + continuous updater into an existing patent-intelligence,
-legal-AI, prior-art, or scientific-information product.
+A serious internal USPTO corpus is not "download some XML." It is concatenated weekly dumps, evolving DTDs, constant-memory parsing, identity keys that survive crashy backfills, legal boilerplate stripping that does not destroy notation, a stable Arrow schema, temporal splits, and a rights notice that does not pretend MIT covers every patent document worldwide. PatentPulse already does that work. The remaining product work for a buyer is search, embeddings, or workflow UI on top of a finished dataset.
 
-## Headline numbers (measured 2026-09-21)
+## Two buyer paths
 
-| Metric | Value |
-| --- | --- |
-| Unique released records | 5,929,464 |
-| JSONL source (uncompressed textual corpus) | **873.8 GB** |
-| Published Parquet on Hub (compressed) | **211.4 GB** (44 shards) |
-| Estimated Parquet uncompressed | **~966.7 GB** |
-| Hub vs JSONL compression ratio | 0.242 |
-| Release duplicates removed | 570,714 (**8.78%** of rows seen) |
-| Malformed JSONL rows skipped | 186 (**0.0029%**) |
-| Parse throughput (fixture-scale e2e, Linux x86_64) | **~1,517 docs/s** |
-| Claims coverage (quality sample) | **100%** nonempty |
-| Description coverage (quality sample) | **99.3%** nonempty |
-| Abstract coverage (quality sample) | **90.9%** nonempty |
-| Primary CPC coverage (quality sample) | **90.8%** nonempty |
+1. **Consume the snapshot** (hours): `load_dataset("theworker02/patentpulse")` after applying the empty-split Hub card fix in [HUB_VIEWER_FIX.md](HUB_VIEWER_FIX.md).
+2. **Take the pipeline** (days to wire, then resumable backfill): `python -m patentpulse.ingest sync` with a USPTO Open Data Portal key. See [BUYER_DEPLOYMENT.md](BUYER_DEPLOYMENT.md).
 
-Sources: `docs/acquisition/metrics/acquisition_metrics.json`,
-`docs/acquisition/metrics/ingestion_benchmark.json`.
+## What is not claimed
 
-## Known diligence flags (disclosed)
-
-1. **Bibliographic sparsity in the published v1 snapshot.** Sampled Hub rows
-   show empty `kind_code`, `filing_date`, `inventor_list`, `assignee_names`,
-   and citation lists. The **current** extractor and unit tests populate these
-   fields; they were largely absent from the historical append-only JSONL that
-   fed the 2026-08-28 release. Remedy: re-ingest weeks of interest and
-   re-export (see [BUYER_DEPLOYMENT.md](BUYER_DEPLOYMENT.md)).
-2. **Not patent-family deduplicated.** Grants and applications can describe
-   related inventions; identity is publication/application keyed.
-3. **No images, sequences as structured modalities, or prosecution outcomes.**
-4. **Data rights are USPTO-sourced `other`**, not a blanket commercial license
-   for every jurisdiction — see [DATA_LICENSE.md](../../DATA_LICENSE.md).
-
-## Transfer package
-
-- GitHub repository (MIT code + docs)
-- Hugging Face dataset snapshot (or private mirror)
-- This acquisition data room
-- Optional: operator knowledge transfer for ODP keys, storage sizing, release cadence
-
-## Next step for buyers
-
-1. Stream a shard: `load_dataset("theworker02/patentpulse", split="train", streaming=True)`
-2. Run [BUYER_DEPLOYMENT.md](BUYER_DEPLOYMENT.md) smoke path on a single weekly ZIP
-3. Schedule a technical diligence call using the metrics JSON as the agenda
+- The snapshot is a 2026-08-28 historical partial of the 2018–2026 backfill, not a claim that every USPTO week is present.
+- Fixture throughput is not full-text production throughput. Production records average ~147 KB of JSONL versus ~2 KB in the benchmark fixture; size-adjusted ingest is discussed in [INGESTION_BENCHMARK.md](INGESTION_BENCHMARK.md).
+- This is not legal advice, validity, infringement, or patentability data.
