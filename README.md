@@ -10,7 +10,7 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 <p>
   <a href="https://github.com/theworker02/patentpulse/releases/latest"><img alt="GitHub release" src="https://img.shields.io/github/v/release/theworker02/patentpulse?sort=semver&label=release&color=4F46E5"></a>
   <a href="https://huggingface.co/datasets/theworker02/patentpulse"><img alt="Hugging Face dataset" src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-dataset-06B6D4"></a>
-  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/code%20license-Proprietary%20(source--available)-green"></a>
+  <a href="LICENSE"><img alt="License: Proprietary source-available" src="https://img.shields.io/badge/code%20license-Proprietary%20(source--available)-green"></a>
   <a href="DATA_LICENSE.md"><img alt="Data license: other" src="https://img.shields.io/badge/data%20license-other-lightgrey"></a>
   <img alt="Python" src="https://img.shields.io/badge/python-3.10%2B-3776AB?logo=python&logoColor=white">
   <img alt="Records" src="https://img.shields.io/badge/records-5.93M-4F46E5">
@@ -61,7 +61,7 @@ The repository is a **local data pipeline plus a published dataset**, not a Pyth
 | Cadence | Weekly â€” grants on Tuesday; applications on Thursday |
 | Records (published snapshot) | 5,929,464 unique records |
 | Temporal splits | train 4,676,062 Â· validation 772,091 Â· test 481,311 |
-| Publication coverage | 2018 through 2026 (backfill in progress) |
+| Publication coverage | 2018–2026 in published snapshot (5.93M records, 44 shards); weekly catalog finish: [docs/acquisition/CORPUS_FINISH.md](docs/acquisition/CORPUS_FINISH.md) |
 | Local storage | SQLite + UTF-8 JSON Lines |
 | Published format | Zstandard-compressed Parquet shards (44 files) |
 | Primary text | Title, abstract, claims, cleaned description |
@@ -218,6 +218,9 @@ All commands are modules under the `patentpulse` package.
 | `python -m patentpulse.ingest run --format both` | Ingest any local archives already present under `data/raw/` |
 | `python -m patentpulse.parse --input <file> --output <db> --format sqlite` | Parse a single XML/ZIP/TAR/GZIP file |
 | `python -m patentpulse.hf_release export --input <jsonl> --output <dir>` | Build a validated, publishable Parquet snapshot |
+| `python -m patentpulse.coverage --from-date 2018-01-01` | Report missing weekly archives vs manifest ([CORPUS_FINISH](docs/acquisition/CORPUS_FINISH.md)) |
+| `python scripts/buyer_demo.py` | &lt;10 min evaluation: source → ingest → query → Parquet |
+| `./scripts/finish_corpus.sh` | Automated Track A finish loop (requires `USPTO_API_KEY`) |
 
 Ingestion is crash-safe and resumable: it uses atomic manifest writes, recovers stale in-progress entries, holds a process lock to prevent overlapping runs, and validates download sizes before committing a file.
 
@@ -231,12 +234,15 @@ The test suite verifies concatenated-document splitting, text cleaning, bibliogr
 
 ## Acquisition data room
 
-Hard diligence metrics (full Hub Parquet footer census), corpus sizes,
-dedup/error rates, a reproducible buyer deployment procedure, and outreach
-materials live under [`docs/acquisition/`](docs/acquisition/README.md).
+**PatentPulse Acquisition Release 1.0** diligence materials live under
+[`docs/acquisition/`](docs/acquisition/README.md): freeze identity, one-page
+teaser, asset schedule, corpus-finish procedure, &lt;10-minute buyer demo,
+measured metrics, and strategic outreach (no asking price).
 
 ```powershell
+python -m pytest tests -q
 python -m patentpulse.metrics --output docs/acquisition/metrics --documents 2000
+python scripts/buyer_demo.py
 ```
 
 Legacy helpers `scripts/benchmark_ingestion.py` and
@@ -247,12 +253,15 @@ reports; prefer the metrics module above for the full measured packet.
 
 Patent text and bibliographic records are retrieved from official public USPTO bulk products. The raw source material remains subject to the USPTO's terms and notices. PatentPulse stores source URLs and checksums in `data/manifest.json` to preserve provenance. This repository does not claim ownership of the underlying public records.
 
-The [MIT License](LICENSE) covers PatentPulse source code and original
-documentation only. Publishable data snapshots use Hugging Face's `other`
-license label, with the complete reuse notice in [DATA_LICENSE.md](DATA_LICENSE.md).
-It permits model training and other reuse only to the extent allowed by
-applicable law and underlying rights; it is not a blanket grant for all patent
-document content or jurisdictions.
+The [LICENSE](LICENSE) (source-available proprietary evaluation terms) covers
+PatentPulse source code and original documentation only. Commercial use and
+acquisition/IP transfer are described in [COMMERCIAL.md](COMMERCIAL.md) and
+[docs/acquisition/ASSET_SCHEDULE.md](docs/acquisition/ASSET_SCHEDULE.md).
+Publishable data snapshots use Hugging Face's `other` license label, with the
+complete reuse notice in [DATA_LICENSE.md](DATA_LICENSE.md). It permits model
+training and other reuse only to the extent allowed by applicable law and
+underlying rights; it is not a blanket grant for all patent document content
+or jurisdictions. USPTO-originated text is not PatentPulse-owned copyright.
 
 For a release checklist, including GitHub tagging and the explicit Hugging Face
 upload command, see [docs/RELEASING.md](docs/RELEASING.md).

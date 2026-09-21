@@ -49,7 +49,7 @@ python -m pip install -r requirements.txt
 python -m pytest tests -q
 ```
 
-Expected: the current test suite passes (21 tests at the time of this packet).
+Expected: the current test suite passes (24 tests at Acquisition Release 1.0).
 
 ### B2. Reproduce this packet's measurements
 
@@ -104,10 +104,11 @@ The exporter refuses incomplete ingest manifests and insufficient disk. It will 
 
 ## Rights and operations
 
-- Code and original docs: MIT ([LICENSE](../../LICENSE)).
-- Snapshot reuse: [DATA_LICENSE.md](../../DATA_LICENSE.md) and USPTO terms. Label Hub copies `other`.
+- Code and original docs: source-available proprietary evaluation terms ([LICENSE](../../LICENSE)); production/acquisition requires a commercial license or transfer ([COMMERCIAL.md](../../COMMERCIAL.md), [ASSET_SCHEDULE.md](ASSET_SCHEDULE.md)).
+- Snapshot reuse: [DATA_LICENSE.md](../../DATA_LICENSE.md) and USPTO terms. Label Hub copies `other`. USPTO text is not PatentPulse-owned copyright.
 - Do not upload `patents.db`, `patents.jsonl`, raw ZIPs, or `data/manifest.json` to a public dataset repo.
 - Pause scheduled ingest while cutting a snapshot ([docs/RELEASING.md](../RELEASING.md)).
+- Sample pipeline without the full corpus: [BUYER_DEMO.md](BUYER_DEMO.md).
 
 ## Suggested acceptance tests for an acquired deployment
 

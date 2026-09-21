@@ -63,7 +63,8 @@ wrong, and orthogonal to product differentiation.
 - 5.93M unique Hub records; digest `42d3a4ae…4944`
 - Claims 100% / description 99.3% / abstract 90.9% nonempty in quality sample
 - ~1.5k docs/s fixture-scale e2e parse on Linux x86_64 (reproducible script)
-- MIT code; transparent data-rights notice for USPTO-sourced text
+- Proprietary source-available code; transparent data-rights notice for USPTO-sourced text
+- No asking price in outbound materials — qualify roadmap fit first
 
 **Deal shapes.** Asset purchase of repo + dataset; exclusive commercial license;
 OEM data feed; or acqui-hire / advisory for continuous backfill ops.
@@ -78,7 +79,7 @@ roadmap (family keys, richer bibliographic backfill, non-US offices).
 | “We already license Derwent/IFI.” | PatentPulse is complementary raw full-text + owned ETL — useful for AI features, eval sets, and reducing dependency on a single feed. |
 | “We’ll just scrape Google Patents.” | Weekly official XML + checksums + manifest beats brittle HTML; legal/ops risk differs. |
 | “Bibliographic fields look sparse on Hub.” | Disclosed: v1 snapshot is full-text heavy; current extractor fills inventors/assignees/citations — re-ingest/re-export is the fix, documented in the data room. |
-| “Is the data MIT-licensed?” | Code is MIT; data is labeled `other` with USPTO attribution — see DATA_LICENSE.md. |
+| “Is the data MIT-licensed?” | Code is source-available proprietary; data is labeled `other` with USPTO attribution — see DATA_LICENSE.md and ASSET_SCHEDULE.md. |
 
 ## Call-to-action links
 

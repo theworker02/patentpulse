@@ -1,6 +1,6 @@
 # Executive summary
 
-PatentPulse is a production USPTO full-text pipeline plus an immutable 5.93 million-record Parquet snapshot. An acquirer does not buy a scraper. They buy a finished weekly ingest loop, a normalized schema with HUPD-compatible aliases, global identity deduplication, and a citable Hub package.
+**PatentPulse Acquisition Release 1.0** is a production USPTO full-text pipeline plus an immutable 5.93 million-record Parquet snapshot. An acquirer does not buy a scraper. They buy a finished weekly ingest loop, a normalized schema with HUPD-compatible aliases, global identity deduplication, and a citable Hub package. See [TEASER.md](TEASER.md) and [ASSET_SCHEDULE.md](ASSET_SCHEDULE.md).
 
 ## Headline metrics (measured 2026-09-21)
 
@@ -33,6 +33,7 @@ A serious internal USPTO corpus is not "download some XML." It is concatenated w
 
 ## What is not claimed
 
-- The snapshot is a 2026-08-28 historical partial of the 2018–2026 backfill, not a claim that every USPTO week is present.
+- The snapshot includes **5,929,464** unique records with publication years **2018–2026** across **44** shards. That is not a claim that every USPTO weekly ZIP in range is `complete` in the operator manifest. Residual weekly coverage is enumerated and finished via [CORPUS_FINISH.md](CORPUS_FINISH.md) (`python -m patentpulse.coverage` + `ingest sync`).
 - Fixture throughput is not full-text production throughput. Production records average ~147 KB of JSONL versus ~2 KB in the benchmark fixture; size-adjusted ingest is discussed in [INGESTION_BENCHMARK.md](INGESTION_BENCHMARK.md).
 - This is not legal advice, validity, infringement, or patentability data.
+- No asking price is published; outreach seeks acquisition or IP-transfer discussions after buyer qualification.
