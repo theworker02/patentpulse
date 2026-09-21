@@ -1,0 +1,189 @@
+{
+  "created_at": "2026-09-21T00:56:57.768892+00:00",
+  "dataset_repo": "theworker02/patentpulse",
+  "release": {
+    "created_at": "2026-08-28T03:13:23+00:00",
+    "canonical_sha256": "42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944",
+    "records_seen": 6500178,
+    "records_written": 5929464,
+    "duplicates_skipped": 570714,
+    "invalid_json_rows": 186,
+    "records_by_split": {
+      "test": 481311,
+      "train": 4676062,
+      "validation": 772091
+    },
+    "shards_by_split": {
+      "test": 4,
+      "train": 34,
+      "validation": 6
+    },
+    "source_file": "patents.jsonl",
+    "source_bytes_jsonl": 873811406212,
+    "max_shard_bytes": 5000000000
+  },
+  "dedup_and_errors": {
+    "duplicate_rate_vs_seen": 0.0878,
+    "duplicate_pct": 8.78,
+    "invalid_json_rate_vs_seen": 2.8615e-05,
+    "invalid_json_pct": 0.002861,
+    "invalid_json_by_error_prefix": {
+      "Expecting value": 174,
+      "Extra data": 9,
+      "Invalid UTF-8": 1,
+      "Expecting ',' delimiter": 2
+    },
+    "yield_unique_vs_seen": 0.9122
+  },
+  "corpus_sizes": {
+    "hub_total_bytes": 211407155512,
+    "hub_total_GB": 211.407,
+    "hub_total_GiB": 196.888,
+    "parquet_file_count": 44,
+    "jsonl_source_bytes": 873811406212,
+    "jsonl_source_GB": 873.811,
+    "estimated_parquet_uncompressed_bytes": 966691768670,
+    "estimated_parquet_uncompressed_GB": 966.692,
+    "estimated_parquet_uncompressed_GiB": 900.302,
+    "compression_ratio_hub_vs_jsonl": 0.2419,
+    "compression_ratio_hub_vs_est_parquet_u": 0.2187,
+    "bytes_per_row_uncompressed_sample": 163031.9,
+    "size_samples": [
+      {
+        "path": "data/train/part-00000.parquet",
+        "rows": 148710,
+        "uncompressed_bytes": 23402564428,
+        "compressed_bytes_meta": 5009853057,
+        "compression_ratio": 0.2141
+      },
+      {
+        "path": "data/validation/part-00005.parquet",
+        "rows": 34084,
+        "uncompressed_bytes": 5834693486,
+        "compressed_bytes_meta": 1228241917,
+        "compression_ratio": 0.2105
+      },
+      {
+        "path": "data/test/part-00003.parquet",
+        "rows": 36933,
+        "uncompressed_bytes": 6585251887,
+        "compressed_bytes_meta": 1374107544,
+        "compression_ratio": 0.2087
+      }
+    ],
+    "methodology": "Hub compressed size sums Hugging Face tree file sizes. Parquet uncompressed size extrapolates average uncompressed bytes/row from three representative shards' footers. JSONL source_bytes comes from release_manifest.json."
+  },
+  "quality_sample": {
+    "rows_sampled": 18168,
+    "document_type_counts": {
+      "application": 6165,
+      "grant": 12003
+    },
+    "publication_year_counts": {
+      "2023": 776,
+      "2024": 7949,
+      "2025": 9443
+    },
+    "field_fill": {
+      "patent_grant_id": {
+        "nonempty_pct": 100.0
+      },
+      "application_number": {
+        "nonempty_pct": 100.0
+      },
+      "publication_date": {
+        "nonempty_pct": 100.0
+      },
+      "invention_title": {
+        "nonempty_pct": 99.824
+      },
+      "abstract_text": {
+        "nonempty_pct": 90.935
+      },
+      "claims_text": {
+        "nonempty_pct": 100.0
+      },
+      "description_text": {
+        "nonempty_pct": 99.279
+      },
+      "document_type": {
+        "nonempty_pct": 100.0
+      },
+      "kind_code": {
+        "nonempty_pct": 0.0
+      },
+      "filing_date": {
+        "nonempty_pct": 0.0
+      },
+      "main_cpc_label": {
+        "nonempty_pct": 90.841
+      },
+      "source_file": {
+        "nonempty_pct": 100.0
+      },
+      "primary_cpc_codes": {
+        "nonempty_list_pct": 90.841
+      },
+      "further_cpc_codes": {
+        "nonempty_list_pct": 0.0
+      },
+      "ipc_codes": {
+        "nonempty_list_pct": 0.0
+      },
+      "assignee_names": {
+        "nonempty_list_pct": 0.0
+      },
+      "cited_patent_ids": {
+        "nonempty_list_pct": 0.0
+      },
+      "inventor_list": {
+        "nonempty_list_pct": 0.0
+      },
+      "cpc_labels": {
+        "nonempty_list_pct": 90.841
+      },
+      "npl_citations": {
+        "nonempty_list_pct": 0.0
+      }
+    },
+    "text_length_stats": {
+      "invention_title": {
+        "coverage_pct": 99.824,
+        "mean_chars": 55.3,
+        "p50_chars": 52,
+        "p90_chars": 97,
+        "p99_chars": 154,
+        "max_chars": 336
+      },
+      "abstract_text": {
+        "coverage_pct": 90.935,
+        "mean_chars": 714.2,
+        "p50_chars": 743,
+        "p90_chars": 962,
+        "p99_chars": 1260,
+        "max_chars": 3763
+      },
+      "claims_text": {
+        "coverage_pct": 100.0,
+        "mean_chars": 6382.0,
+        "p50_chars": 5872,
+        "p90_chars": 11207,
+        "p99_chars": 20533,
+        "max_chars": 140619
+      },
+      "description_text": {
+        "coverage_pct": 99.279,
+        "mean_chars": 63286.0,
+        "p50_chars": 47320,
+        "p90_chars": 125872,
+        "p99_chars": 326065,
+        "max_chars": 1969457
+      }
+    },
+    "caveats": [
+      "Sampled row groups from train part-00000 and validation part-00000; not a full-corpus census.",
+      "Published snapshot may omit bibliographic fields that the current extractor populates (kind_code, filing_date, inventors, assignees, citations) when historical JSONL rows predated those fields. Re-ingest + re-export recovers them.",
+      "Design/plant patents commonly lack abstracts and CPC labels; that is expected source sparsity."
+    ]
+  }
+}
