@@ -24,7 +24,7 @@
   },
   "bytes_per_row_compressed": 35653.66679315365,
   "bytes_per_row_uncompressed_pages": 163631.91870985302,
-  "collected_at": "2026-09-21T01:04:02+00:00",
+  "collected_at": "2026-09-21T02:11:03+00:00",
   "column_bytes": {
     "abstract": {
       "compressed": 1168110813,

@@ -1,66 +1,71 @@
-# Target acquirers
+# Target acquirers — first 25 strategic prospects
 
-PatentPulse is useful to a buyer that already sells search, analytics, or models on technical documents and currently spends internal engineering on USPTO XML. It is a poor fit for a firm that only wants a hosted docketing UI with no data team.
+PatentPulse sits adjacent to companies whose businesses already depend on patent data, search, analytics, AI, prior-art discovery, or IP intelligence. Prospects are grouped by **why they might care**, not by equal acquisition likelihood.
 
-Each row is a company where owning this corpus and pipeline can replace an internal USPTO full-text ingest program.
+**Sell directly first.** Marketplaces are secondary. **No public asking price** — qualify roadmap fit, then negotiate.
 
-## Patent intelligence
+Primary messaging: [TEASER.md](TEASER.md) · send order: [OUTREACH.md](OUTREACH.md).
 
-| Company | Why an acquisition lands | Public entry |
+## Wave 1 (start here)
+
+| Company | Why PatentPulse is relevant | Contact target |
 | --- | --- | --- |
-| Clarivate (Derwent, Cortellis, IP Group) | Derwent already commercializes value-added patent content. A local, provenance-preserving USPTO full-text layer plus weekly sync is months of DE they should not redo for every new AI surface. | [IP contact](https://clarivate.com/intellectual-property/contact-us/) |
-| Questel | Orbit/FAMPAT buyers expect complete full text. Questel already partners for data adjacency; a ready USPTO XML→Parquet plant is a cheaper alternative to another internal parser. | communication@questel.com |
-| PatSnap | AI-native patent analytics needs clean title/abstract/claims/description at 5.93M scale with CPC labels. | demo-inquiry@patsnap.com, hello@patsnap.com |
-| Minesoft (PatBase) | Search quality is gated on full-text ingest correctness, not on another frontend. | info@minesoft.com |
-| LexisNexis Intellectual Property (TotalPatent, IPlytics) | Legal research + SEP/standards analytics both sit on full text. | Sales via LexisNexis IP |
-| Cipher / Aistemos | Portfolio analytics needs stable CPC and claims text more than another crawler. | Corporate site |
-| IP.com | Prior-art and professional search is a direct consumer of this schema. | Corporate site |
+| **IFI CLAIMS Patent Services** | Patent-data infrastructure is its business; CLAIMS Direct feeds AI/search/analytics. USPTO ingest/normalize/release tech is immediately understandable. | CEO / Product / Data |
+| **Amplified AI** | AI patent search over 140M+ patents, updated weekly — pipeline architecture is directly adjacent. | Founder / CTO / Product |
+| **IPRally** | Patent AI/search expanding into Intelligence, Protection, APIs and MCP; 130M+ patent search surface. | CEO / CPO / CTO |
+| **PatSeer** | Patent search, analytics, AI classification and global patent-data infrastructure. | CEO / Product |
+| **Minesoft** | Patent intelligence/search investing in AI and structured patent analysis. | CEO / CTO / Product |
+| **IP.com** | Patent/NPL intelligence and AI systems whose core product depends on high-quality corpora. | CEO / Product / Data |
+| **Patsnap** | AI-native innovation platform on 214M+ patents across 174 jurisdictions. | Corp Dev / Data / Product |
+| **Anaqua** | AcclaimIP searches/analyzes 175M+ documents and adds ~170K weekly. | Corp Dev / Product |
+| **Questel** | Orbit Intelligence ingests 500+ patent/scientific/technical sources. | Corp Dev / Data |
+| **LexisNexis Intellectual Property Solutions** | Sells patent data for analytics/AI/LLM initiatives; PatentSight/IPlytics adjacency. | Corp Dev / IP Data |
 
-## Legal-AI
+## Wave 2 — patent intelligence & analytics
 
-| Company | Why an acquisition lands | Public entry |
+| Company | Why PatentPulse is relevant | Contact target |
 | --- | --- | --- |
-| Harvey | Patent practice in 2,400+ legal orgs needs a rights-labeled, locally hostable USPTO corpus rather than scraping. | [Partnerships](https://www.harvey.ai/platform/partnerships) |
-| Thomson Reuters (CoCounsel / Westlaw) | Existing legal AI plus IP content; missing piece is often the engineering of weekly XML, not another LLM wrapper. | Corporate development |
-| Lexis+ AI | Same shape as TR: distribution exists, USPTO full-text plumbing is a DE tax. | Corporate development |
-| Luminance | Document intelligence firms expand into patents only after the corpus is boring. | info@luminance.com |
-| Spellbook | Contract AI moving toward patent prosecution support. | Public site / sales form |
-| EvenUp, Relativity, Everlaw, DISCO, vLex | Litigation and discovery tools that want patent exhibits and prior art as first-class data. | Corporate sites |
-| Legora, Paxton, Robin AI | Newer legal-AI stacks that should buy a corpus instead of hiring a USPTO XML team. | Corporate sites |
+| **Clarivate** | Derwent: patent search, APIs/data feeds, AI on enriched patent information. | Corp Dev / Derwent Product |
+| **RPX Corporation** | Patent transaction/litigation/intelligence datasets and RPX Empower. | Data / Intelligence |
+| **Google Patents** | Massive patent-search infrastructure; less likely as a small acquisition but technically aligned. | Patents/Data product |
+| **Dolcera** | Patent analytics, research and IP intelligence. | Founder / Product |
+| **GreyB** | Patent research, analytics and technology intelligence. | Founder / Product |
+| **Sagacious IP** | Patent research / IP intelligence where ingestion tooling has operational value. | CEO / Technology |
+| **Patentcloud** (InQuartik) | Patent search/analytics ecosystem. | CEO / Product |
+| **Patentfield** | AI-driven patent search and analysis. | Founder / Product |
+| **PatentSight+ / LexisNexis** | Enriched patent analytics — treat as a **separate internal business-unit lead**, not a second company. | PatentSight product leadership |
 
-## Prior-art / search vendors
+## Wave 3 — scientific, legal, drafting adjacency
 
-| Company | Why an acquisition lands | Public entry |
+| Company | Why PatentPulse is relevant | Contact target |
 | --- | --- | --- |
-| IPRally | Graph/AI prior-art search is only as good as normalized claims and CPC. | sales@iprally.com |
-| Amplified | Dedicated prior-art search; ingest is a cost center. | info@amplified.ai |
-| Ambercite, Patentics, Specifio, PQAI | Citation and search specialists. PQAI in particular is an open prior-art effort that benefits from a stable bulk layer. | Corporate sites |
-| Google Patents | Unlikely acquirer; still a distribution benchmark. | n/a |
-
-## Scientific-information companies
-
-| Company | Why an acquisition lands | Public entry |
-| --- | --- | --- |
-| Digital Science (Dimensions) | Dimensions already blends grants, publications, and patents. A trustworthy USPTO full-text store is the missing local copy. | info@digital-science.com |
-| Elsevier (Scopus, SciVal) | Patent–paper linkage products need the same claims/description text PatentPulse already normalized. | Corporate development |
-| Clarivate (Web of Science / Derwent overlap) | See patent intelligence. | IP contact page |
-| CAS (American Chemical Society) | Chemistry patents are a first-class CAS product; weekly XML plumbing is still DE. | Corporate site |
-| Allen Institute for AI / Semantic Scholar | Open scientific indexers that treat patents as scholarly documents. | allenai.org |
-| IEEE, ACS publications groups | Standards and society publishers with adjacent patent landscapes. | Corporate sites |
-
-## AI-data companies
-
-| Company | Why an acquisition lands | Public entry |
-| --- | --- | --- |
-| Hugging Face | Already hosts the snapshot. An acquisition is the pipeline, the weekly refresh, and the rights-aware exporter, not the Parquet files alone. | [Contact sales](https://huggingface.co/contact/sales), website@huggingface.co |
-| Snorkel AI | Programmatic labeling over noisy XML is exactly what they sell; a clean USPTO base dataset shortens every patent vertical engagement. | info@snorkel.ai |
-| Scale AI, Surge, Labelbox | Patent annotation programs start with a stable document store. | Corporate sales |
-| Databricks / Mosaic | Enterprise customers ask for domain corpora; USPTO full text is a recurring request. | Corporate development |
-| Cohere, Together AI, AI2 | Domain-continued pretraining on patents needs a legal-to-train, deduplicated dump rather than raw Red Book ZIPs. | Cohere partner form; Together AI sales; Ai2 |
-| Gretel, Common Crawl-adjacent data firms | Synthetic or web-scale data companies that want a high-signal technical vertical. | Corporate sites |
+| **CAS** | Scientific/IP information with patent-linked technical datasets. | Data / Product |
+| **Wolters Kluwer** | Legal/professional information products; broader fit. | Corp Dev / Legal Tech |
+| **Thomson Reuters** | Legal/data/AI infrastructure; broader strategic fit. | Corp Dev / Legal AI |
+| **Legora** | AI legal-research building structured legal-information corpora. | Founders / Data |
+| **Harvey** | Legal AI where provenance-preserving technical corpora can be strategic. | Data / Product |
+| **Patently** | AI patent drafting/research workflows; structured patent infrastructure may be complementary. | Founder / CTO |
 
 ## Disqualified or weak fits
 
 - Pure docketing SaaS with no data platform team
 - Firms that need EPO/WIPO/CN/JP first (this corpus is USPTO only)
-- Buyers who require drawings, sequence listings as structured data, or PAIR prosecution histories (not in this snapshot)
+- Buyers who require drawings, structured sequence listings, or PAIR histories (not in this snapshot)
+- Bargain “side project” marketplace browsers as a primary channel
+
+## Public entry points (Wave 1, general inboxes)
+
+| Company | Published general entry |
+| --- | --- |
+| IFI CLAIMS | info@ificlaims.com, sales@ificlaims.com |
+| Amplified | info@amplified.ai |
+| IPRally | sales@iprally.com |
+| PatSeer | sales@patseer.com |
+| Minesoft | info@minesoft.com |
+| IP.com | sales@ip.com |
+| Patsnap | demo-inquiry@patsnap.com, hello@patsnap.com |
+| Anaqua | info@anaqua.com |
+| Questel | communication@questel.com |
+| LexisNexis IP | ip@lexisnexis.com |
+
+Do not cold-email personal employee inboxes scraped from the web.

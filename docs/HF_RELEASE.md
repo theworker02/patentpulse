@@ -15,7 +15,7 @@ to Hugging Face.
    card uses the Hugging Face `other` license value because USPTO records can
    include third-party material and the USPTO reserves international rights.
    Read [DATA_LICENSE.md](../DATA_LICENSE.md) before publishing; it explains
-   why the MIT code license is not a blanket data license.
+   why the proprietary code license is not a blanket data license.
 
 ## Build and validate
 

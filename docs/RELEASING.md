@@ -17,8 +17,10 @@ bypass it; either ingest the missing source successfully or explicitly ship a
 new, clearly documented partial-snapshot workflow in a future release.
 
 Review [DATA_LICENSE.md](../DATA_LICENSE.md) and the [USPTO Terms of
-Use](https://www.uspto.gov/terms-use-uspto-websites). The software is MIT;
-dataset snapshots use Hugging Face's `other` label and the data-rights notice.
+Use](https://www.uspto.gov/terms-use-uspto-websites). The software is
+source-available proprietary ([LICENSE](../LICENSE)); dataset snapshots use
+Hugging Face's `other` label and the data-rights notice. For acquisition
+freezes see [acquisition/ACQUISITION_RELEASE.md](acquisition/ACQUISITION_RELEASE.md).
 
 ## 2. Build and validate an immutable snapshot
 

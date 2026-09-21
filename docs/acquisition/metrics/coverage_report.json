@@ -1,0 +1,121 @@
+{
+  "generated_at": "2026-09-21T02:11:26+00:00",
+  "data_root": "/workspace/data",
+  "window": {
+    "from_date": "2018-01-01",
+    "to_date": "2026-09-21"
+  },
+  "expectation_source": "calendar_estimate",
+  "manifest_summary": {
+    "files_total": 0,
+    "files_complete": 0,
+    "files_pending": 0,
+    "files_running": 0,
+    "files_failed": 0,
+    "records_parsed": 0,
+    "records_written": 0,
+    "records_failed": 0
+  },
+  "manifest_status_counts": {
+    "complete": 0,
+    "pending": 0,
+    "running": 0,
+    "failed": 0,
+    "other": 0
+  },
+  "products": {
+    "grant_fulltext": {
+      "expected_archives": 455,
+      "complete_in_window": 0,
+      "missing_archives": 455,
+      "missing_sample": [
+        "ipg180102.zip",
+        "ipg180109.zip",
+        "ipg180116.zip",
+        "ipg180123.zip",
+        "ipg180130.zip",
+        "ipg180206.zip",
+        "ipg180213.zip",
+        "ipg180220.zip",
+        "ipg180227.zip",
+        "ipg180306.zip",
+        "ipg180313.zip",
+        "ipg180320.zip",
+        "ipg180327.zip",
+        "ipg180403.zip",
+        "ipg180410.zip",
+        "ipg180417.zip",
+        "ipg180424.zip",
+        "ipg180501.zip",
+        "ipg180508.zip",
+        "ipg180515.zip",
+        "ipg180522.zip",
+        "ipg180529.zip",
+        "ipg180605.zip",
+        "ipg180612.zip",
+        "ipg180619.zip"
+      ],
+      "complete_sample": []
+    },
+    "application_fulltext": {
+      "expected_archives": 455,
+      "complete_in_window": 0,
+      "missing_archives": 455,
+      "missing_sample": [
+        "ipa180104.zip",
+        "ipa180111.zip",
+        "ipa180118.zip",
+        "ipa180125.zip",
+        "ipa180201.zip",
+        "ipa180208.zip",
+        "ipa180215.zip",
+        "ipa180222.zip",
+        "ipa180301.zip",
+        "ipa180308.zip",
+        "ipa180315.zip",
+        "ipa180322.zip",
+        "ipa180329.zip",
+        "ipa180405.zip",
+        "ipa180412.zip",
+        "ipa180419.zip",
+        "ipa180426.zip",
+        "ipa180503.zip",
+        "ipa180510.zip",
+        "ipa180517.zip",
+        "ipa180524.zip",
+        "ipa180531.zip",
+        "ipa180607.zip",
+        "ipa180614.zip",
+        "ipa180621.zip"
+      ],
+      "complete_sample": []
+    }
+  },
+  "totals": {
+    "expected_archives": 910,
+    "complete_in_window": 0,
+    "missing_archives": 910,
+    "coverage_ratio": 0.0
+  },
+  "resource_estimate_for_missing": {
+    "notes": "Planning figures only. Transient ZIP disk assumes ~1.5 GB/week resident; parse time uses ~19 docs/s size-adjusted single-process estimate from Acquisition Release 1.0 benchmarks. If this clone has an empty data/manifest.json (typical for a fresh git checkout), missing_archives equals the full calendar/ODP window even though the published Hub snapshot already contains 5.93M rows. Run coverage on the operator host that owns the production manifest.",
+    "transient_zip_gb_if_one_at_a_time": 1.5,
+    "transient_zip_gb_if_all_retained": 1365.0,
+    "assumed_docs_per_missing_week": 8000,
+    "estimated_parse_cpu_hours_single_process": 106.43,
+    "persistent_parquet_gb_current_snapshot": 211.41,
+    "persistent_jsonl_gb_current_snapshot": 873.81
+  },
+  "frozen_snapshot_reminder": {
+    "unique_records": 5929464,
+    "shards": 44,
+    "publication_years": "2018-2026",
+    "canonical_digest": "42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944"
+  },
+  "next_commands": [
+    "export USPTO_API_KEY=...",
+    "python -m patentpulse.ingest sync --source both --format both --weeks 20",
+    "python -m patentpulse.coverage --from-date 2018-01-01 --json docs/acquisition/metrics/coverage_report.json",
+    "./scripts/finish_corpus.sh --from-date 2018-01-01 --weeks-per-batch 20"
+  ]
+}

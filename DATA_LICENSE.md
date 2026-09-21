@@ -10,8 +10,10 @@ grant rights in material owned by another party.
 
 Published snapshots must use Hugging Face's `other` license label. They must
 link to this notice and to the [USPTO Terms of Use](https://www.uspto.gov/terms-use-uspto-websites).
-The repository-level [MIT License](LICENSE) applies only to PatentPulse source
-code and its original documentation.
+The repository-level [LICENSE](LICENSE) (source-available proprietary evaluation
+terms) applies only to PatentPulse source code and its original documentation.
+It does not convey ownership of USPTO document text. See
+[docs/acquisition/ASSET_SCHEDULE.md](docs/acquisition/ASSET_SCHEDULE.md).
 
 ## What PatentPulse permits
 

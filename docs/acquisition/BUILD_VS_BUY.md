@@ -12,7 +12,7 @@ Acquiring PatentPulse is a data-engineering substitution, not a search-product s
 | Dedup across retries | Global key set on 6.5M JSONL rows | 570,714 duplicates already removed in the public snapshot |
 | Schema stability | One Arrow schema, aliases, no local paths | `hf_release` exporter |
 | Temporal splits | Leakage-safe train/val/test by publication year | Already applied |
-| Rights posture | MIT-vs-USPTO confusion | Explicit `other` label + [DATA_LICENSE.md](../../DATA_LICENSE.md) |
+| Rights posture | Proprietary-code-vs-USPTO confusion | Explicit `other` label + [DATA_LICENSE.md](../../DATA_LICENSE.md) + [ASSET_SCHEDULE.md](ASSET_SCHEDULE.md) |
 | Provenance | Per-week URL, SHA-256, counts | Manifest contract (local pipeline) |
 | Quality evidence | Someone has to measure fill rates on 5.93M rows | This data room |
 

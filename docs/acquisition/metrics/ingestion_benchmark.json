@@ -1,7 +1,7 @@
 {
-  "collected_at": "2026-09-21T01:04:06+00:00",
+  "collected_at": "2026-09-21T02:11:08+00:00",
   "environment": {
-    "collected_at": "2026-09-21T01:04:06+00:00",
+    "collected_at": "2026-09-21T02:11:08+00:00",
     "cpu_count": 4,
     "cpu_model": "Intel(R) Xeon(R) Processor",
     "machine": "x86_64",
@@ -90,14 +90,14 @@
     "configured_duplicate_fraction": 0.08,
     "configured_truncated_documents": 5,
     "configured_unknown_documents": 25,
-    "docs_per_second": 1443.6157458056541,
+    "docs_per_second": 1472.737092007359,
     "documents_failed": 25,
     "documents_parsed": 2005,
     "documents_seen": 2030,
     "parse_failure_rate": 0.012315270935960592,
     "records_skipped": 164,
     "records_written": 1841,
-    "seconds": 1.3888737400000082,
+    "seconds": 1.3614106759999913,
     "write_skip_rate": 0.08179551122194513
   },
   "output_bytes": {
@@ -111,18 +111,18 @@
     "expected_all_skipped": true,
     "records_skipped": 2000,
     "records_written": 0,
-    "seconds": 1.283295781999982
+    "seconds": 1.3954674840000507
   },
   "unique_pass": {
-    "docs_per_second": 1465.3357318212784,
+    "docs_per_second": 1453.3350959382087,
     "documents_failed": 0,
     "documents_parsed": 2000,
     "documents_seen": 2000,
-    "peak_rss_bytes": 396128256,
-    "records_per_second": 1465.3357318212784,
+    "peak_rss_bytes": 395714560,
+    "records_per_second": 1453.3350959382087,
     "records_skipped": 0,
     "records_written": 2000,
     "rss_delta_bytes": 0,
-    "seconds": 1.3648749269999598
+    "seconds": 1.3761451199999328
   }
 }

@@ -1,51 +1,68 @@
-# Outreach
+# Outreach — Acquisition Release 1.0
 
-## Pitch (plain text)
+**Channel priority:** sell directly to strategic buyers (patent intelligence, prior-art/search, legal AI, technical-data providers, patent-specific model builders). Marketplaces are a **secondary** channel only.
 
-Subject: PatentPulse — 5.93M USPTO full-text records, pipeline included
+**Pricing:** do **not** publish an asking price. Use “seeking acquisition or IP transfer discussions,” qualify roadmap relevance first, then negotiate assets, exclusivity, transition, and post-close involvement.
 
-PatentPulse is a locally owned USPTO grants-and-applications corpus plus the weekly ingest pipeline that produced it. I am opening an acquisition conversation because buying it is cheaper than standing up an internal USPTO XML team.
+## Teaser email (Wave 1)
 
-Measured snapshot (Hugging Face `theworker02/patentpulse`, 2026-08-28):
+Subject: PatentPulse — USPTO Data Infrastructure Acquisition Opportunity
 
-- 5,929,464 unique full-text records (train/val/test by publication year)
-- 6,500,178 valid JSONL rows in; 570,714 duplicates removed (8.78%); 186 malformed lines quarantined (0.00286%)
-- 873.81 GB uncompressed JSONL → 211.41 GB Zstd Parquet (44 shards)
-- 100% fill on grant id, application number, publication date, claims, document type
-- 99.89% titles, 99.11% descriptions, 94.67% abstracts, 94.61% primary CPC
-- Canonical digest 42d3a4ae94b40d7e0ba3d76e02ce8af92704adde242153389b3d7cef544e4944
+PatentPulse — USPTO Data Infrastructure Acquisition Opportunity
 
-The code stream-parses official weekly XML in constant memory, writes SQLite and JSONL, and exports a single Arrow schema with HUPD-compatible aliases. A 4-vCPU box parses 1,465 fixture docs/s and skips 100% of rows on replay into the same SQLite file.
+5.93M normalized records | 2018–2026 | 44 Parquet shards | ~1.6 TB source corpus processed | weekly USPTO ingestion | resumable provenance | SQLite + JSONL + Parquet | ML/LLM-ready
 
-This is the work your data engineers would otherwise spend the next several months on: concatenated Red Book dumps, DTD drift, identity keys, torn-write JSONL, disk guards, and a rights notice that does not pretend MIT covers every patent document.
+Asset. Production-oriented ingestion, normalization, provenance, validation and release infrastructure for USPTO grants and applications.
 
-I am not asking you to license a search UI. I am asking whether your corp-dev or data platform team wants the corpus and the plant.
+Opportunity. Acquisition of PatentPulse's transferable software/IP, project assets, documentation and handoff—not merely access to public patent documents.
+
+Diligence. Acquisition data room, reproducible metrics, dataset card, licensing documentation, architecture documentation and technical handoff available. A buyer can clone the evaluation package and run a sub-10-minute demo: USPTO-shaped source → ingest → query → Parquet.
+
+Is PatentPulse relevant to your patent-data, AI-training, search, or IP-intelligence roadmap, and would your team be open to reviewing the acquisition materials?
 
 Links:
-
+- Freeze / data room: https://github.com/theworker02/patentpulse (docs/acquisition/)
+- One-page teaser: docs/acquisition/TEASER.md
 - Pipeline: https://github.com/theworker02/patentpulse
 - Snapshot: https://huggingface.co/datasets/theworker02/patentpulse
-- Data room: https://github.com/theworker02/atlas-of-knowledge/blob/cursor/patentpulse-acquisition-data-room-e1fd/docs/patentpulse-acquisition/README.md
-- Packet PR: https://github.com/theworker02/atlas-of-knowledge/pull/1
 
 Matthew Looney
 matthewlooney5@gmail.com
 https://github.com/theworker02
 
+## Wave 1 (send first — do not blast all 25)
+
+| Company | Contact target | Public entry used when available |
+| --- | --- | --- |
+| IFI CLAIMS Patent Services | CEO / Product / Data | info@ificlaims.com, sales@ificlaims.com |
+| Amplified AI | Founder / CTO / Product | info@amplified.ai |
+| IPRally | CEO / CPO / CTO | sales@iprally.com |
+| PatSeer | CEO / Product | Website / sales (form if no public inbox) |
+| Minesoft | CEO / CTO / Product | info@minesoft.com |
+| IP.com | CEO / Product / Data | Website / sales |
+| Patsnap | Corp Dev / Data / Product | demo-inquiry@patsnap.com (prefer general inbox; not personal) |
+| Anaqua | Corp Dev / Product | Website / sales |
+| Questel | Corp Dev / Data | communication@questel.com |
+| LexisNexis Intellectual Property | Corp Dev / IP Data | ip@lexisnexis.com |
+
+Why these ten: patent-data infrastructure or AI search products that already depend on weekly, high-quality corpora. IFI is the clearest “data plant” adjacency; Amplified / IPRally / Patsnap / LexisNexis explicitly sell AI or bulk-data surfaces on patent text.
+
+## Full strategic list (25)
+
+See [TARGET_ACQUIRERS.md](TARGET_ACQUIRERS.md) for all 25 with relevance notes. Waves 2–3 wait until Wave 1 responses clarify interest density.
+
 ## Contact log
 
-Emails are sent only to addresses published on the company's own site or company page, as general sales/partnerships inboxes, not personal employee inboxes.
+Emails are sent only to addresses published on the company's own site as general sales/partnerships inboxes, not personal employee inboxes, unless the company designates a press/BD address for inbound deals.
 
-| Date (UTC) | Company | Category | Address | Status |
+| Date (UTC) | Company | Wave | Address | Status |
 | --- | --- | --- | --- | --- |
-| 2026-09-21 | IPRally | Prior-art / search | sales@iprally.com | sent (`1a0c1891c27353a6`) |
-| 2026-09-21 | PatSnap | Patent intelligence | demo-inquiry@patsnap.com | sent (`1a0c1891f6d982dd`) |
-| 2026-09-21 | Amplified | Prior-art / search | info@amplified.ai | sent (`1a0c18920f554281`) |
-| 2026-09-21 | Minesoft | Patent intelligence | info@minesoft.com | sent (`1a0c1897fbb82888`) |
-| 2026-09-21 | Questel | Patent intelligence | communication@questel.com | sent (`1a0c18980e3f3173`) |
-| 2026-09-21 | Luminance | Legal-AI | info@luminance.com | sent (`1a0c189827bd6137`) |
-| 2026-09-21 | Digital Science | Scientific information | info@digital-science.com | sent (`1a0c189dc3733207`) |
-| 2026-09-21 | Snorkel AI | AI-data | info@snorkel.ai | sent (`1a0c189dff12afd7`) |
-| 2026-09-21 | Hugging Face | AI-data | website@huggingface.co | sent (`1a0c189e00ae1d67`) |
+| 2026-09-21 | IPRally | prior | sales@iprally.com | sent (earlier metrics pitch) |
+| 2026-09-21 | PatSnap | prior | demo-inquiry@patsnap.com | sent (earlier metrics pitch) |
+| 2026-09-21 | Amplified | prior | info@amplified.ai | sent (earlier metrics pitch) |
+| 2026-09-21 | Minesoft | prior | info@minesoft.com | sent (earlier metrics pitch) |
+| 2026-09-21 | Questel | prior | communication@questel.com | sent (earlier metrics pitch) |
+| 2026-09-21 | IFI CLAIMS | prior | info@ificlaims.com, sales@ificlaims.com | sent (earlier pitch) |
+| 2026-09-21 | LexisNexis IP | prior | ip@lexisnexis.com | sent (earlier pitch) |
 
-Companies with partnership **forms only** (Clarivate IP, Harvey, Cohere, Together AI, Thomson Reuters, LexisNexis IP, CAS, Allen AI) are listed in [TARGET_ACQUIRERS.md](TARGET_ACQUIRERS.md) and were not cold-emailed to privacy or recruiting inboxes.
+Wave 1 Acquisition Release 1.0 teaser sends are appended after freeze commit (same day follow-up with asset-transaction framing where a prior note already landed).

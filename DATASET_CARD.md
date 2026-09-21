@@ -145,7 +145,7 @@ For claims-to-abstract summarization, use `claims_text` as input and `abstract_t
 
 ## Known limitations
 
-- The dataset is a backfill in progress; coverage is incomplete until all manifest entries are complete.
+- Acquisition Release 1.0 includes **5,929,464** unique records with publication years **2018–2026** across **44** Parquet shards. Weekly catalog completeness is an operator finish job; see [docs/acquisition/CORPUS_FINISH.md](docs/acquisition/CORPUS_FINISH.md).
 - XML schemas and field availability vary over time, especially in historic data.
 - Design and plant patents commonly have sparse abstracts, claims, or CPC data.
 - CPC labels can be incomplete or absent in a particular weekly record.
@@ -172,10 +172,12 @@ Do not delete the manifest when regenerating local outputs.
 ## Licensing and attribution
 
 Raw records originate from USPTO public bulk products. The PatentPulse code and
-original documentation are MIT-licensed; a published data snapshot is labeled
-`other` on Hugging Face because the project cannot issue a blanket license for
-every underlying patent document worldwide. See [DATA_LICENSE.md](DATA_LICENSE.md)
-for the complete reuse notice.
+original documentation are source-available proprietary ([LICENSE](LICENSE));
+a published data snapshot is labeled `other` on Hugging Face because the project
+cannot issue a blanket license for every underlying patent document worldwide.
+See [DATA_LICENSE.md](DATA_LICENSE.md) for the complete reuse notice and
+[docs/acquisition/ASSET_SCHEDULE.md](docs/acquisition/ASSET_SCHEDULE.md) for
+owned IP vs USPTO material.
 
 PatentPulse imposes no additional restriction against machine-learning training
 or research use, but users must review the [USPTO Terms of

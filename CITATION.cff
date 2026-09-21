@@ -4,7 +4,7 @@ message: If you use PatentPulse, cite the USPTO bulk sources and this software.
 type: software
 authors:
   - name: theworker02
-license: MIT
+license: other-closed
 repository-code: https://github.com/theworker02/patentpulse
 keywords:
   - USPTO
