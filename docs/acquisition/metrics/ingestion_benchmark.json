@@ -1,0 +1,36 @@
+{
+  "created_at": "2026-09-21T00:56:51.665290+00:00",
+  "host": {
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "fixture": "tests/fixtures/sample_bulk.xml",
+  "input_bytes": 6592000,
+  "requested_docs": 2000,
+  "extract_only": {
+    "documents": 2000,
+    "elapsed_s": 1.2147,
+    "docs_per_s": 1646.46,
+    "input_MB_per_s": 5.427
+  },
+  "e2e_sqlite_and_jsonl": {
+    "documents_seen": 2000,
+    "documents_parsed": 2000,
+    "documents_failed": 0,
+    "records_written": 2000,
+    "records_skipped": 0,
+    "elapsed_s": 1.318,
+    "docs_per_s": 1517.46,
+    "input_MB_per_s": 5.002,
+    "db_MB": 2.236,
+    "jsonl_MB": 3.865,
+    "batch_size": 200
+  },
+  "notes": [
+    "Synthetic documents reuse fixture XML with unique grant/application identifiers so SQLite dedup does not collapse the workload.",
+    "Throughput is CPU-bound XML parse + clean + write; network download of USPTO archives is excluded.",
+    "Absolute docs/s depends on document size; fixture documents are small relative to full utility patents."
+  ]
+}

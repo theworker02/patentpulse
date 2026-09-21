@@ -42,6 +42,7 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 - [Architecture](#architecture)
 - [Command reference](#command-reference)
 - [Quality and validation](#quality-and-validation)
+- [Acquisition data room](#acquisition-data-room)
 - [Source and licensing](#source-and-licensing)
 - [Citation](#citation)
 - [Related work](#related-work)
@@ -227,6 +228,17 @@ python -m pytest tests -q
 ```
 
 The test suite verifies concatenated-document splitting, text cleaning, bibliographic/CPC extraction, and SQLite/JSONL output.
+
+## Acquisition data room
+
+Hard diligence metrics, corpus size calculations, dedup/error rates, a
+reproducible buyer deployment procedure, and outreach materials live under
+[`docs/acquisition/`](docs/acquisition/README.md).
+
+```powershell
+python scripts/benchmark_ingestion.py --docs 2000 --output docs/acquisition/metrics/ingestion_benchmark.json
+python scripts/compute_acquisition_metrics.py --output docs/acquisition/metrics/acquisition_metrics.json
+```
 
 ## Source and licensing
 
