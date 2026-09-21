@@ -24,7 +24,7 @@ history. Contact status is tracked in this file; pitches live in
 
 | Company | Why PatentPulse fits | Public contact | Outreach status |
 | --- | --- | --- | --- |
-| **LexisNexis (Lexis+ AI / IP)** | Legal research + patent adjacent products | Corporate / product BD channels | Listed |
+| **LexisNexis (Lexis+ AI / IP)** | Legal research + patent adjacent products | `ip@lexisnexis.com` | **Sent** 2026-09-21 (`1a0c17a0e0d95680`) |
 | **Thomson Reuters (CoCounsel / Westlaw)** | Legal AI stack; patent full text for specialist agents | Corporate BD | Listed |
 | **Harvey** | Domain LLM for legal work; patent corpus for specialized tools | Website | Listed |
 | **Casetext** (TR) | Legal AI heritage | Via Thomson Reuters | Listed |
