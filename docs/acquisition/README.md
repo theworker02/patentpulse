@@ -23,6 +23,7 @@ Re-run those commands to refresh the JSON and demo timings. Do not treat marketi
 | [ASSET_SCHEDULE.md](ASSET_SCHEDULE.md) | What transfers vs USPTO material vs OSS dependencies |
 | [CORPUS_FINISH.md](CORPUS_FINISH.md) | Remaining weekly coverage, storage/compute, automated finish |
 | [BUYER_DEMO.md](BUYER_DEMO.md) | &lt;10 min evaluation: source → ingest → query → Parquet |
+| [../BUYER_QUICKSTART.md](../BUYER_QUICKSTART.md) | 15-minute evaluator path (peek + Hub stream) |
 | [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md) | Headline metrics and the acquisition thesis |
 | [QUALITY_METRICS.md](QUALITY_METRICS.md) | Field fill rates over all 5,929,464 published rows |
 | [INGESTION_BENCHMARK.md](INGESTION_BENCHMARK.md) | Measured docs/sec, replay dedup, hardware |
