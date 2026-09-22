@@ -1,84 +1,180 @@
-# Acquisition Brief — PatentPulse
+# Acquisition Brief â€” Full corpus with temporal splits
 
-**Date:** 2026-09-21  
-**Status:** Briefing document only. **No acquisition has occurred** by virtue of this file.
+**Date:** 2026-09-22  
+**Repository:** https://github.com/theworker02/patentpulse  
+**Default branch:** `main`  
+**Primary language:** Python  
+**Status:** Diligence briefing only. **No acquisition has occurred** by virtue of this file.  
+**License:** Proprietary â€” sale, written commercial license, or completed asset transfer required (see root `LICENSE`).  
+**Valuation:** Not stated.  
+**Contact:** GitHub [@theworker02](https://github.com/theworker02) Â· [thanks.dev/u/gh/theworker02](https://thanks.dev/u/gh/theworker02)
 
-## What the project does
+> Cloning or forking this repository does **not** grant production, redistribution, SaaS, OEM, or commercial rights.
 
-USPTO full-text ingestion pipeline plus an immutable **5.93 million-record** Parquet snapshot: weekly grant and application XML dumps are streamed, normalized, deduplicated, and published for search, NLP, and model training.
+---
 
-## Problem
+## 1. Executive thesis
 
-Building a serious local USPTO corpus is not “download some XML.” It requires evolving DTDs, constant-memory parsing, crash-safe identity keys, legal boilerplate stripping, a stable schema, and a rights notice that does not pretend open-source licenses cover every patent document worldwide.
+<img src="assets/patentpulse-logo.svg" alt="PatentPulse" width="440" /> <p><strong>A continuously growing, provenance-preserving corpus of USPTO patent grants and published applications.</strong><br/> Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and normalized into SQLite, JSON Lines, and a publishable Parquet snapshot.</p>
 
-## Headline metrics (measured 2026-09-21)
+**Why a buyer cares:** Full corpus with temporal splits packages transferable product IP â€” source, docs, in-repo brand assets, and a diligence room under `docs/acquisition/` â€” under a clear proprietary posture so diligence can proceed without mistaking the repo for open source.
 
-| Metric | Value |
-| --- | --- |
-| Unique released records | **5,929,464** |
-| Valid JSONL rows seen | 6,500,178 |
-| Duplicates removed | 570,714 (**8.78%**) |
-| Malformed JSONL rows skipped | 186 (**0.00286%**) |
-| Unique yield of valid JSON | **91.22%** |
-| Uncompressed JSONL input | **873.81 GB** |
-| Published Zstd Parquet | **211.41 GB** (44 shards) |
-| Publication years | **2018–2026** |
-| Core ID fill rate | **100%** (grant id, application number, publication date, claims, document type, source file) |
-| Local ingest throughput (fixture) | **1,465 docs/s** |
+---
 
-Full measured packet: [`docs/acquisition/EXECUTIVE_SUMMARY.md`](docs/acquisition/EXECUTIVE_SUMMARY.md).
+## 2. Product snapshot
 
-## What is included in a transaction (typical)
+| Item | Detail |
+|------|--------|
+| Product | Full corpus with temporal splits |
+| Repo | `theworker02/patentpulse` |
+| Language | Python |
+| Open source? | **No** â€” proprietary |
+| Rightsholder | theworker02 |
+| Diligence pack | `docs/acquisition/` |
 
-- Git repository and original PatentPulse pipeline / docs (subject to agreement)
-- Asserted copyright in original works (subject to counsel / chain of title)
-- Branding assets created for PatentPulse
-- Acquisition data room under `docs/acquisition/`
-- Rights to continue and redistribute the published Hub snapshot under the data notice (subject to USPTO and applicable law)
+### Capability highlights (from current materials)
 
-## What is NOT included
+- [What PatentPulse is](#what-patentpulse-is)
+- [Dataset at a glance](#dataset-at-a-glance)
+- [Use the published dataset](#use-the-published-dataset)
+- [Why weekly dumps matter](#why-weekly-dumps-matter)
+- [Quick start](#quick-start)
+- [Continue the official backfill](#continue-the-official-backfill)
+- [Outputs](#outputs)
+- [Building a Hugging Face release](#hugging-face-release)
+- [Architecture](#architecture)
+- [Command reference](#command-reference)
+- [Quality and validation](#quality-and-validation)
+- [Acquisition data room](#acquisition-data-room)
 
-- Ownership of USPTO-originated patent text and bibliographic records
-- Historical evaluation grants already received by third parties
-- Third-party dependency source
-- Buyer cloud accounts, USPTO API keys, or Hugging Face tokens
-- Fabricated user/revenue metrics (none claimed)
-- An asking price (none published)
+---
 
-## Maturity
+## 3. Problem / opportunity
 
-**PatentPulse Acquisition Release 1.0** — production weekly ingest loop, HUPD-compatible field aliases, global identity deduplication, and a citable Hub package. Single human maintainer.
+Teams evaluating Full corpus with temporal splits typically need either (a) a commercial right to run or embed it, or (b) outright ownership of the Product IP for strategic build-out. Public GitHub visibility without a proprietary license creates false assumptions about free production use. This brief and the linked data room make the commercial path explicit.
 
-## Deployment model
+---
 
-Two buyer paths:
+## 4. What ships today
 
-1. **Consume the snapshot** — `load_dataset("theworker02/patentpulse")` ([Hugging Face](https://huggingface.co/datasets/theworker02/patentpulse))
-2. **Take the pipeline** — `python -m patentpulse.ingest sync` with a USPTO Open Data Portal key
+Honest maturity: treat repository contents, README claims, tests, and release tags as the source of truth. Do not assume production customers, ARR, filed patents, or SLAs unless separately evidenced in diligence.
 
-Local SQLite inspection without a full Hub download: `python -m patentpulse.peek`. Fifteen-minute evaluation: [`docs/BUYER_QUICKSTART.md`](docs/BUYER_QUICKSTART.md).
+Typical transferable surfaces:
 
-## Technical differentiation
+- Source tree and build/test scripts present in-repo
+- Documentation and design notes
+- Acquisition / diligence markdown under `docs/acquisition/`
+- Branding assets committed to the repository (if any)
 
-Official weekly source archives with per-file provenance; grants and applications in one corpus; resumable backfill; immutable Parquet release with measured quality metrics — not a one-off scrape.
+---
 
-## Diligence pointers
+## 5. Demo / evaluation path (buyer)
 
-Start in [`docs/acquisition/`](docs/acquisition/README.md) — especially:
+Minimal path (no secrets required unless README says otherwise):
 
-- [EXECUTIVE_SUMMARY.md](docs/acquisition/EXECUTIVE_SUMMARY.md)
-- [TEASER.md](docs/acquisition/TEASER.md)
-- [ASSET_SCHEDULE.md](docs/acquisition/ASSET_SCHEDULE.md)
-- [BUYER_DEMO.md](docs/acquisition/BUYER_DEMO.md)
-- [BUYER_DEPLOYMENT.md](docs/acquisition/BUYER_DEPLOYMENT.md)
-- [ACQUISITION_RELEASE.md](docs/acquisition/ACQUISITION_RELEASE.md)
-- [READINESS_REPORT.md](docs/acquisition/READINESS_REPORT.md)
-- [DISCLOSURE_SCHEDULE.md](docs/acquisition/DISCLOSURE_SCHEDULE.md)
-- [IP_AUDIT.md](docs/acquisition/IP_AUDIT.md)
-- [TRANSFER_PLAN.md](docs/acquisition/TRANSFER_PLAN.md)
+```
+```python
+from datasets import load_dataset
 
-## Acquisition contact
+# Full corpus with temporal splits
+ds = load_dataset("theworker02/patentpulse")
+print(ds)  # train / validation / test
 
-GitHub [@theworker02](https://github.com/theworker02) · https://github.com/theworker02/patentpulse
+# Stream instead of downloading everything
+stream = load_dataset("theworker02/patentpulse", split="train", streaming=True)
+print(next(iter(stream))["invention_title"])
+```
+```powershell
+python -m patentpulse.ingest status
+```
+```powershell
+pip install -r requirements.txt
 
-No valuation is stated in this document.
+# View local corpus coverage and row counts
+python -m patentpulse.ingest status
+
+# Inspect a local SQLite corpus (stats / search / get)
+python -m patentpulse.peek stats
+python -m patentpulse.peek search "machine learning" --limit 10
+python -m patentpulse.peek get 10000000
+
+# Parse a downloaded XML or ZIP into SQLite
+python -m patentpulse.parse `
+  --input data/raw/grants/ipgYYMMDD.zip `
+  --output data/processed/patents.db `
+  --format sqlite
+```
+```python
+from datasets import load_dataset
+
+ds = load_dataset("theworker02/patentpulse")  # train / validation / test
+stream = load_dataset("theworker02/patentpulse", split="train", streaming=True)
+print(next(iter(stream))["invention_title"])
+```
+```powershell
+$env:USPTO_API_KEY = "..."
+```
+
+Extended evaluation: `docs/acquisition/BUYER_EVALUATION.md`. Written NDA / evaluation grants may be required for private materials.
+
+---
+
+## 6. What a transaction typically includes
+
+Subject to definitive schedules:
+
+| Included (typical) | Excluded (typical) |
+|--------------------|--------------------|
+| Repo materials + asserted original IP | Seller personal accounts / unrelated repos |
+| Docs + diligence room at closing | Third-party dependency source under separate licenses |
+| In-repo brand marks as assigned | Secrets without rotation plan |
+| Know-how captured in docs | Fabricated revenue, user, or adoption metrics |
+
+---
+
+## 7. Suggested deal structures
+
+| Structure | When it fits |
+|-----------|--------------|
+| Non-exclusive commercial license | Deploy/run under seat or environment terms |
+| Exclusive field-of-use license | Buyer wants exclusivity; seller may retain entity |
+| Asset / IP assignment | Buyer wants ownership of Materials outright |
+| OEM / redistribution | Separate agreement â€” not implied here |
+
+Commercial terms (price, earnouts, escrow) are negotiated under NDA with counsel.
+
+---
+
+## 8. Buyer diligence checklist
+
+- [ ] Confirm Rightsholder identity and authority to sell/license
+- [ ] Inventory Materials (`docs/acquisition/ASSET_INVENTORY.md`)
+- [ ] Review IP posture (`IP_PROVENANCE.md`) and dependencies (`DEPENDENCY_INVENTORY.md`)
+- [ ] Run evaluation script (`BUYER_EVALUATION.md`)
+- [ ] Review risks (`RISK_REGISTER.md`)
+- [ ] Agree transfer scope (`TRANSFER_MANIFEST.md`) and handoff (`HANDOFF_CHECKLIST.md`)
+- [ ] Supersede root `LICENSE` at closing via definitive agreement
+
+---
+
+## 9. Related documents
+
+| Document | Purpose |
+|----------|---------|
+| `LICENSE` | Proprietary â€” no default grant |
+| `docs/acquisition/README.md` | Data-room index |
+| `docs/acquisition/EXECUTIVE_SUMMARY.md` | One-page thesis |
+| `README.md` | Product overview |
+| `SECURITY.md` | Vulnerability reporting |
+| `COMMERCIAL.md` | Licensing contact path |
+| `.github/FUNDING.yml` | Sponsors / thanks.dev |
+
+---
+
+## 10. Disclaimer
+
+This package is informational and **does not** create a binding offer, grant of rights, or investment advice. Engage counsel for any transaction.
+
+---
+
+*Document version: 2.0.0 / 2026-09-22 Â· Classification: acquisition briefing*
