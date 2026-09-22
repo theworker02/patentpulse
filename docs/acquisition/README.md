@@ -34,8 +34,17 @@ Re-run those commands to refresh the JSON and demo timings. Do not treat marketi
 | [TARGET_ACQUIRERS.md](TARGET_ACQUIRERS.md) | First 25 strategic prospects + Wave 1 |
 | [OUTREACH.md](OUTREACH.md) | Asset-transaction pitch (no asking price) + contact log |
 | [HUB_VIEWER_FIX.md](HUB_VIEWER_FIX.md) | Empty `unspecified` split that currently breaks the Hub viewer |
+| [IP_AUDIT.md](IP_AUDIT.md) | Code vs USPTO text; brand; AI authorship flag |
+| [LICENSE_HISTORY.md](LICENSE_HISTORY.md) | Proprietary present; historical grants survivors |
+| [TRANSFER_PLAN.md](TRANSFER_PLAN.md) | Close / post-close operational checklist |
+| [READINESS_REPORT.md](READINESS_REPORT.md) | Gate statuses without a fake numeric score |
+| [TEST_EVIDENCE.md](TEST_EVIDENCE.md) | pytest + buyer demo + CI |
+| [SECURITY_POSTURE.md](SECURITY_POSTURE.md) | Local-first trust boundaries |
+| [DISCLOSURE_SCHEDULE.md](DISCLOSURE_SCHEDULE.md) | Bibliographic null cluster, Hub viewer, license transition |
 | [outreach/](outreach/) | Earlier outreach log and pitch drafts (diligence trail) |
 | [metrics/](metrics/) | Machine-readable reports |
+
+Root brief: [`../../ACQUISITION.md`](../../ACQUISITION.md) · Security policy: [`../../SECURITY.md`](../../SECURITY.md)
 
 ## Snapshot identity
 

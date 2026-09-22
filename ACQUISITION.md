@@ -72,6 +72,10 @@ Start in [`docs/acquisition/`](docs/acquisition/README.md) — especially:
 - [BUYER_DEMO.md](docs/acquisition/BUYER_DEMO.md)
 - [BUYER_DEPLOYMENT.md](docs/acquisition/BUYER_DEPLOYMENT.md)
 - [ACQUISITION_RELEASE.md](docs/acquisition/ACQUISITION_RELEASE.md)
+- [READINESS_REPORT.md](docs/acquisition/READINESS_REPORT.md)
+- [DISCLOSURE_SCHEDULE.md](docs/acquisition/DISCLOSURE_SCHEDULE.md)
+- [IP_AUDIT.md](docs/acquisition/IP_AUDIT.md)
+- [TRANSFER_PLAN.md](docs/acquisition/TRANSFER_PLAN.md)
 
 ## Acquisition contact
 
