@@ -19,9 +19,10 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 </p>
 
 <p>
-  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><strong>Dataset on Hugging Face</strong></a> Â·
-  <a href="DATASET_CARD.md">Dataset card</a> Â·
-  <a href="docs/HF_RELEASE.md">Release exporter</a> Â·
+  <a href="https://huggingface.co/datasets/theworker02/patentpulse"><strong>Dataset on Hugging Face</strong></a> ·
+  <a href="ACQUISITION.md">Acquisition brief</a> ·
+  <a href="DATASET_CARD.md">Dataset card</a> ·
+  <a href="docs/HF_RELEASE.md">Release exporter</a> ·
   <a href="docs/RELEASING.md">Release checklist</a>
 </p>
 
@@ -46,6 +47,8 @@ Official weekly XML dumps are streamed, parsed in constant memory, cleaned, and 
 - [Source and licensing](#source-and-licensing)
 - [Citation](#citation)
 - [Related work](#related-work)
+
+Acquisition evaluators: start at **[ACQUISITION.md](ACQUISITION.md)**.
 
 ## What PatentPulse is
 
@@ -107,12 +110,29 @@ pip install -r requirements.txt
 # View local corpus coverage and row counts
 python -m patentpulse.ingest status
 
+# Inspect a local SQLite corpus (stats / search / get)
+python -m patentpulse.peek stats
+python -m patentpulse.peek search "machine learning" --limit 10
+python -m patentpulse.peek get 10000000
+
 # Parse a downloaded XML or ZIP into SQLite
 python -m patentpulse.parse `
   --input data/raw/grants/ipgYYMMDD.zip `
   --output data/processed/patents.db `
   --format sqlite
 ```
+
+No local database yet? Load the published Hub snapshot (streaming avoids the full ~212 GB download):
+
+```python
+from datasets import load_dataset
+
+ds = load_dataset("theworker02/patentpulse")  # train / validation / test
+stream = load_dataset("theworker02/patentpulse", split="train", streaming=True)
+print(next(iter(stream))["invention_title"])
+```
+
+Acquisition evaluators: [ACQUISITION.md](ACQUISITION.md) and the 15-minute path in [docs/BUYER_QUICKSTART.md](docs/BUYER_QUICKSTART.md).
 
 ## Continue the official backfill
 
@@ -217,6 +237,9 @@ All commands are modules under the `patentpulse` package.
 | `python -m patentpulse.ingest sync --source both --format both` | Download and ingest remaining weekly dumps (resumable) |
 | `python -m patentpulse.ingest run --format both` | Ingest any local archives already present under `data/raw/` |
 | `python -m patentpulse.parse --input <file> --output <db> --format sqlite` | Parse a single XML/ZIP/TAR/GZIP file |
+| `python -m patentpulse.peek stats` | Local SQLite row counts, date range, document-type breakdown |
+| `python -m patentpulse.peek search "<query>" [--limit N]` | Keyword search over title and abstract |
+| `python -m patentpulse.peek get <grant-or-app-id>` | Fetch one record as JSON |
 | `python -m patentpulse.hf_release export --input <jsonl> --output <dir>` | Build a validated, publishable Parquet snapshot |
 | `python -m patentpulse.coverage --from-date 2018-01-01` | Report missing weekly archives vs manifest ([CORPUS_FINISH](docs/acquisition/CORPUS_FINISH.md)) |
 | `python scripts/buyer_demo.py` | &lt;10 min evaluation: source → ingest → query → Parquet |
@@ -234,10 +257,11 @@ The test suite verifies concatenated-document splitting, text cleaning, bibliogr
 
 ## Acquisition data room
 
-**PatentPulse Acquisition Release 1.0** diligence materials live under
+Start with the root brief **[ACQUISITION.md](ACQUISITION.md)** (no valuation). Diligence materials live under
 [`docs/acquisition/`](docs/acquisition/README.md): freeze identity, one-page
 teaser, asset schedule, corpus-finish procedure, &lt;10-minute buyer demo,
-measured metrics, and strategic outreach (no asking price).
+measured metrics, and strategic outreach (no asking price). Fifteen-minute
+evaluator path: [docs/BUYER_QUICKSTART.md](docs/BUYER_QUICKSTART.md).
 
 ```powershell
 python -m pytest tests -q
@@ -248,6 +272,13 @@ python scripts/buyer_demo.py
 Legacy helpers `scripts/benchmark_ingestion.py` and
 `scripts/compute_acquisition_metrics.py` remain for the earlier sampled
 reports; prefer the metrics module above for the full measured packet.
+
+### Release notes (Acquisition Release 1.0 polish)
+
+There is no separate `CHANGELOG` file; version identity is
+[VERSION](VERSION) (`PatentPulse Acquisition Release 1.0`). This polish adds
+root `ACQUISITION.md`, `python -m patentpulse.peek` for local SQLite
+inspection, and [docs/BUYER_QUICKSTART.md](docs/BUYER_QUICKSTART.md).
 
 ## Source and licensing
 
