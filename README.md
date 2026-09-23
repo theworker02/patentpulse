@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 <img src="assets/patentpulse-logo.svg" alt="PatentPulse" width="440" />
 
